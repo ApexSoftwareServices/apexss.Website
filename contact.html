@@ -1,210 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <meta name="copyright" content="MACode ID, https://macodeid.com">
-
-  <title>Apex Software Services</title>
-
-  <link rel="stylesheet" href="./assets/vendor/animate/animate.css">
-
-  <link rel="stylesheet" href="./assets/css/bootstrap.css">
-
-  <link rel="stylesheet" href="./assets/css/maicons.css">
-
-  <link rel="stylesheet" href="./assets/vendor/owl-carousel/css/owl.carousel.css">
-
-  <link rel="stylesheet" href="./assets/css/theme.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Apex Software Services</title>
+  <meta name="description" content="Contact Apex Software Services for SaaS application development, custom software projects, cloud APIs, and consulting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<header class="nav-wrap"><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>Apex Software Services</span></a><nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a class="active" href="contact.html">Contact</a></nav><div class="nav-actions"><a class="btn btn-primary" href="contact.html">Start a Project</a><button class="menu-btn" id="menuBtn">☰</button></div></div></header>
 
-  <!-- Back to top button -->
-  <div class="back-to-top"></div>
+<main>
+  <section class="page-hero">
+    <div class="container page-hero-inner reveal">
+      <div class="kicker"><span class="kicker-dot"></span> Contact</div>
+      <h1>Let’s talk about what you want to <span class="gradient-text">build next.</span></h1>
+      <p class="lead">Have a SaaS idea, custom software project, or consulting need? Send your inquiry to Apex Software Services. All website inquiries are directed to <strong>info@apexss.com</strong>.</p>
+    </div>
+  </section>
 
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
-      <div class="container">
-        <a href="index.html" class="navbar-brand">Apex<span class="text-primary">Software.</span></a>
-
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse collapse" id="navbarContent">
-          <ul class="navbar-nav ml-lg-4 pt-3 pt-lg-0">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="services.html" class="nav-link">Services</a>
-            </li>
-            <li class="nav-item">
-              <a href="blog.html" class="nav-link">News</a>
-            </li>
-            <li class="nav-item active">
-              <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-          </ul>
-
-          <div class="ml-auto">
-            <a href="#" class="btn btn-outline rounded-pill">Get a Quote</a>
+  <section class="section">
+    <div class="container cta-box reveal">
+      <div class="cta-grid">
+        <div>
+          <div class="kicker"><span class="kicker-dot"></span> Start a conversation</div>
+          <h2 class="section-title">Tell us about your project.</h2>
+          <p class="section-copy">Use the form or email Apex directly at <a href="mailto:info@apexss.com"><strong>info@apexss.com</strong></a>. Share what you want to build, your goals, and any timing or budget expectations.</p>
+          <div class="checks">
+            <div class="check">SaaS product or MVP idea</div>
+            <div class="check">Custom portal, dashboard, or workflow system</div>
+            <div class="check">Cloud API, integration, or modernization project</div>
+            <div class="check">Architecture, planning, or consulting request</div>
           </div>
         </div>
-      </div>
-    </nav>
 
-    <div class="container mt-5">
-      <div class="page-banner">
-        <div class="row justify-content-center align-items-center h-100">
-          <div class="col-md-6">
-            <nav aria-label="Breadcrumb">
-              <ul class="breadcrumb justify-content-center py-0 bg-transparent">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Contact</li>
-              </ul>
-            </nav>
-            <h1 class="text-center">Contact Us</h1>
-          </div>
-        </div>
+        <form class="contact-card" action="mailto:info@apexss.com" method="post" enctype="text/plain">
+          <input type="hidden" name="recipient" value="info@apexss.com" />
+          <input type="hidden" name="subject" value="New Apex Software Services inquiry" />
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
+          <div class="field"><label for="company">Company</label><input id="company" name="company" type="text" placeholder="Company name" /></div>
+          <div class="field"><label for="message">Project Details</label><textarea id="message" name="message" placeholder="Tell us what you want to build..." required></textarea></div>
+          <button class="btn btn-primary" type="submit" style="width:100%;">Send Inquiry to info@apexss.com</button>
+        </form>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <div class="page-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 py-3">
-            <h2 class="title-section">Get in Touch</h2>
-            <div class="divider"></div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Laborum ratione autem quidem veritatis!</p>
-  
-            <ul class="contact-list">
-              <li>
-                <div class="icon"><span class="mai-map"></span></div>
-                <div class="content">6252 N Lincoln Ave, Unit 2, Chicago, IL, USA</div>
-              </li>
-              <li>
-                <div class="icon"><span class="mai-mail"></span></div>
-                <div class="content"><a href="#">info@apexss.com</a></div>
-              </li>
-              <li>
-                <div class="icon"><span class="mai-phone-portrait"></span></div>
-                <div class="content"><a href="#">+00 1122 3344 55</a></div>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-6 py-3">
-            <div class="subhead">Contact Us</div>
-            <h2 class="title-section">Drop Us a Line</h2>
-            <div class="divider"></div>
-            
-            <form action="#">
-              <div class="py-2">
-                <input type="text" class="form-control" placeholder="Full name">
-              </div>
-              <div class="py-2">
-                <input type="text" class="form-control" placeholder="Email">
-              </div>
-              <div class="py-2">
-                <textarea rows="6" class="form-control" placeholder="Enter message"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary rounded-pill mt-4">Send Message</button>
-            </form>
-          </div>
-        </div>
-      </div> <!-- .container -->
-    </div> <!-- .page-section -->
-  </main>
+  <section class="section">
+    <div class="container grid-3">
+      <article class="card reveal"><div class="service-icon">📩</div><h3>Email</h3><p>For all project, consulting, and business inquiries.</p><a class="btn btn-dark" href="mailto:info@apexss.com">info@apexss.com</a></article>
+      <article class="card reveal"><div class="service-icon">🧭</div><h3>Best first step</h3><p>Send a short summary of your idea, current pain point, target users, and desired launch timeline.</p></article>
+      <article class="card reveal"><div class="service-icon">💡</div><h3>What Apex can help with</h3><p>SaaS apps, custom projects, cloud APIs, architecture, modernization, UI/UX, and consulting.</p></article>
+    </div>
+  </section>
+</main>
 
-  <footer class="page-footer">
-    <div class="container">
-      <div class="row justify-content-center mb-5">
-        <div class="col-lg-3 py-3">
-          <h3>Apex<span class="text-primary">Software.</span></h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-
-          <p><a href="#" >info@apexss.com</a></p>
-          <p><a href="#">+00 1122 3344 5566</a></p>
-        </div>
-        <div class="col-lg-3 py-3">
-          <h5>Quick Links</h5>
-          <ul class="footer-menu">
-            <li><a href="#">How it works</a></li>
-            <li><a href="#">Security</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Resources</a></li>
-            <li><a href="#">Report a Bug</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-3 py-3">
-          <h5>About Us</h5>
-          <ul class="footer-menu">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Jobs</a></li>
-            <li><a href="#">Our Teams</a></li>
-            <li><a href="#">Testimonials</a></li>
-            <li><a href="#">News & Press</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-3 py-3">
-          <h5>Subscribe</h5>
-          <form action="#">
-            <input type="text" class="form-control" placeholder="Enter your mail..">
-          </form>
-
-          <div class="sosmed-button mt-4">
-            <a href="#"><span class="mai-logo-facebook-f"></span></a>
-            <a href="#"><span class="mai-logo-twitter"></span></a>
-            <a href="#"><span class="mai-logo-google"></span></a>
-            <a href="#"><span class="mai-logo-linkedin"></span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6 py-2">
-          <p id="copyright">&copy; 2020 <a href="https://macodeid.com/">MACode ID</a>. All rights reserved</p>
-        </div>
-        <div class="col-sm-6 py-2 text-right">
-          <div class="d-inline-block px-3">
-            <a href="#">Privacy</a>
-          </div>
-          <div class="d-inline-block px-3">
-            <a href="#">Contact Us</a>
-          </div>
-        </div>
-      </div>
-    </div> <!-- .container -->
-  </footer> <!-- .page-footer -->
-
-
-  <script src="./assets/js/jquery-3.5.1.min.js"></script>
-
-  <script src="./assets/js/bootstrap.bundle.min.js"></script>
-
-  <script src="./assets/vendor/wow/wow.min.js"></script>
-
-  <script src="./assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
-
-  <script src="./assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-
-  <script src="./assets/vendor/animateNumber/jquery.animateNumber.min.js"></script>
-
-  <script src="./assets/js/google-maps.js"></script>
-
-  <script src="./assets/js/theme.js"></script>
-
-  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIA_zqjFMsJM_sxP9-6Pde5vVCTyJmUHM&callback=initMap"></script> -->
-
-
+<footer><div class="container"><div class="footer-grid"><div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>Apex Software Services</span></a><p>Startup-style software development for SaaS applications, custom platforms, cloud APIs, and consulting.</p></div><div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div><div class="footer-col"><h4>Services</h4><a href="services.html">SaaS Development</a><a href="services.html">Custom Software</a><a href="services.html">Consulting</a></div><div class="footer-col"><h4>Contact</h4><span>Chicago, Illinois</span><a href="mailto:info@apexss.com">info@apexss.com</a><a href="contact.html">Request Consultation</a></div></div><div class="copyright"><span>© <span id="year"></span> Apex Software Services. All rights reserved.</span><span>All inquiries: info@apexss.com</span></div></div></footer>
+<script src="script.js"></script>
 </body>
 </html>
