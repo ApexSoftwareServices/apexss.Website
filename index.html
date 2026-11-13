@@ -3,151 +3,269 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apex Software Services | Startup-Style SaaS & Custom Software</title>
-  <meta name="description" content="Apex Software Services builds SaaS applications, custom software platforms, cloud APIs, and provides technology consulting for growing businesses." />
+  <title>Apex Software Services | Software, AI, Cloud &amp; Hardware</title>
+  <meta name="description" content="Apex Software Services builds software, private local AI, cloud platforms and hardware, plus high-end websites, animated product commercials and educational games. Over 20 years of experience." />
+  <meta name="theme-color" content="#f3f5fa" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 61 55 55'%3E%3Crect x='-3' y='61' width='55' height='55' rx='12' fill='%23fff'/%3E%3Cpath d='M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z' fill='%23282828'/%3E%3Cpath d='M25 65.500 29.400 74h-8.900z' fill='%2384b81b'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Rokkitt:wght@800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function (d) {
+      var t = 'light';
+      try { t = localStorage.getItem('apex-theme') || 'light'; } catch (e) {}
+      d.dataset.theme = t === 'dark' ? 'dark' : 'light';
+      if ('noModule' in HTMLScriptElement.prototype) d.classList.add('js');
+    })(document.documentElement);
+  </script>
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
 </head>
-<body>
-  <div class="page-shell">
-    <header class="nav-wrap">
-      <div class="container nav">
-        <a class="brand" href="index.html"><span class="brand-mark">A</span><span>Apex Software Services</span></a>
-        <nav class="nav-links" id="navLinks">
-          <a class="active" href="index.html">Home</a>
-          <a href="services.html">Services</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-        <div class="nav-actions">
-          <a class="btn btn-primary" href="contact.html">Start a Project</a>
-          <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="reveal">
-            <div class="kicker"><span class="kicker-dot"></span> SaaS products • Custom platforms • Consulting</div>
-            <h1>We build software like a <span class="gradient-text">startup product team.</span></h1>
-            <p class="lead">Apex Software Services helps companies turn ideas, manual workflows, and business problems into clean, scalable software products. We build SaaS apps, custom client projects, cloud APIs, and modern digital platforms across many domains.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary btn-wide-mobile" href="contact.html">Book a Free Consultation</a>
-              <a class="btn btn-dark btn-wide-mobile" href="services.html">View Services</a>
-            </div>
-            <div class="logo-cloud">
-              <span>.NET</span><span>Angular</span><span>React</span><span>Azure</span><span>AWS</span><span>APIs</span><span>SaaS</span>
-            </div>
-          </div>
-
-          <div class="app-visual reveal">
-            <div class="visual-glow"></div>
-            <div class="browser-card">
-              <div class="browser-top">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <strong>Launch OS</strong>
-              </div>
-              <div class="browser-body">
-                <div class="visual-header">
-                  <div><strong>Product Build System</strong><span>From idea to production-ready platform</span></div>
-                  <div class="status-pill">Live Sprint</div>
-                </div>
-                <div class="analytics-grid">
-                  <div class="analytics-card"><span>MVP Scope</span><strong>32</strong></div>
-                  <div class="analytics-card"><span>Automations</span><strong>18</strong></div>
-                  <div class="analytics-card"><span>APIs</span><strong>12</strong></div>
-                </div>
-                <div class="flow-list">
-                  <div class="flow-item"><span class="icon-bubble">🚀</span><div><strong>SaaS Launch</strong><small>Multi-tenant apps, subscriptions, portals, and dashboards.</small></div></div>
-                  <div class="flow-item"><span class="icon-bubble">⚙️</span><div><strong>Custom Systems</strong><small>Workflow platforms built around your operations.</small></div></div>
-                  <div class="flow-item"><span class="icon-bubble">☁️</span><div><strong>Cloud Backend</strong><small>Secure APIs, integrations, automation, and reporting.</small></div></div>
-                </div>
-              </div>
-            </div>
-            <div class="floating-note"><strong>Startup speed. Enterprise thinking.</strong><p>Move fast without creating a messy system you regret later.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head reveal">
-            <div class="kicker"><span class="kicker-dot"></span> What Apex builds</div>
-            <h2 class="section-title">Modern software for teams that need momentum.</h2>
-            <p class="section-copy">We combine product thinking, engineering discipline, and clean design to deliver software that feels polished and works reliably.</p>
-          </div>
-          <div class="grid-3">
-            <article class="card reveal"><div class="service-icon">🧩</div><h3>Custom Software</h3><p>Business portals, workflow systems, internal tools, dashboards, and client-facing platforms built around your process.</p><div class="tags"><span class="tag">Portals</span><span class="tag">Workflows</span><span class="tag">Dashboards</span></div></article>
-            <article class="card reveal"><div class="service-icon">🚀</div><h3>SaaS Applications</h3><p>Subscription-ready platforms with multi-tenant architecture, user roles, admin tools, billing, and reporting.</p><div class="tags"><span class="tag">MVP</span><span class="tag">Billing</span><span class="tag">Admin</span></div></article>
-            <article class="card reveal"><div class="service-icon">🧠</div><h3>Consulting</h3><p>Architecture, cloud planning, modernization, product strategy, code review, and technical roadmap guidance.</p><div class="tags"><span class="tag">Strategy</span><span class="tag">Architecture</span><span class="tag">Cloud</span></div></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container split">
-          <div class="feature-card reveal">
-            <div class="kicker"><span class="kicker-dot"></span> Product-first delivery</div>
-            <h2 class="section-title">Not just code. A complete path from idea to launch.</h2>
-            <p class="section-copy">Apex helps define the product, simplify the scope, build the right foundation, and launch software your users can adopt quickly.</p>
-            <div class="checks">
-              <div class="check">MVP planning and phased roadmap</div>
-              <div class="check">Modern UI/UX and responsive interfaces</div>
-              <div class="check">Secure cloud architecture and API design</div>
-              <div class="check">Post-launch improvements and support</div>
-            </div>
-          </div>
-          <div class="illustration-panel reveal" aria-hidden="true">
-            <svg viewBox="0 0 520 420" role="img" aria-label="Animated software product illustration">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#32f5b4"/><stop offset="0.52" stop-color="#23d5ff"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
-                <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5fb7"/><stop offset="1" stop-color="#ff9f43"/></linearGradient>
-              </defs>
-              <rect x="58" y="52" width="404" height="285" rx="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
-              <rect x="84" y="84" width="170" height="42" rx="14" fill="url(#g1)" opacity="0.92"/>
-              <rect x="84" y="150" width="120" height="120" rx="24" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)"/>
-              <rect x="226" y="150" width="210" height="28" rx="14" fill="rgba(255,255,255,0.14)"/>
-              <rect x="226" y="194" width="170" height="28" rx="14" fill="rgba(255,255,255,0.10)"/>
-              <rect x="226" y="238" width="196" height="28" rx="14" fill="rgba(255,255,255,0.10)"/>
-              <circle cx="144" cy="210" r="39" fill="url(#g2)" opacity="0.88"/>
-              <path class="animated-line" d="M98 324 C160 285 197 363 253 324 S350 276 424 324" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round"/>
-              <circle cx="424" cy="108" r="26" fill="url(#g1)"><animate attributeName="cy" values="108;92;108" dur="4s" repeatCount="indefinite"/></circle>
-              <circle cx="76" cy="314" r="18" fill="#ffe066"><animate attributeName="cy" values="314;298;314" dur="3.4s" repeatCount="indefinite"/></circle>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta-band">
-        <div class="container cta-box reveal">
-          <div class="cta-grid">
-            <div>
-              <div class="kicker"><span class="kicker-dot"></span> Ready to build?</div>
-              <h2 class="section-title">Let’s turn your software idea into a product.</h2>
-              <p class="section-copy">Tell us what you want to build. All inquiries go directly to <strong>info@apexss.com</strong>.</p>
-            </div>
-            <a class="btn btn-primary btn-wide-mobile" href="contact.html">Contact Apex</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>Apex Software Services</span></a><p>Startup-style software development for SaaS applications, custom platforms, cloud APIs, and consulting.</p></div>
-          <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
-          <div class="footer-col"><h4>Services</h4><a href="services.html">SaaS Development</a><a href="services.html">Custom Software</a><a href="services.html">Consulting</a></div>
-          <div class="footer-col"><h4>Contact</h4><span>Chicago, Illinois</span><a href="mailto:info@apexss.com">info@apexss.com</a><a href="contact.html">Request Consultation</a></div>
-        </div>
-        <div class="copyright"><span>© <span id="year"></span> Apex Software Services. All rights reserved.</span><span>All inquiries: info@apexss.com</span></div>
-      </div>
-    </footer>
+<body class="home">
+  <div id="preloader" class="preloader">
+    <div class="pre-inner">
+      <div class="pre-logo"><svg class="logo" viewBox="0 63 176 62" role="img" aria-label="Apex Software Services"><g fill="currentColor"><path d="M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z"/><path d="M51.5 66H77a9.5 9.5 0 0 1 9.5 9.5v7A9.5 9.5 0 0 1 77 92H63.5q-2.5 0-2.5 2.5V109h-9.5V92.5A9.5 9.5 0 0 1 61 83h12.5a4 4 0 0 0 0-8h-22z"/><path d="M126.5 66H101a10 10 0 0 0-10 10v6q0 3 4.5 5.5-4.5 2.5-4.5 5.5v6a10 10 0 0 0 10 10h25.5v-9h-21a4 4 0 0 1 0-8h21v-9h-21a4 4 0 0 1 0-8h21z"/></g><path fill="#84b81b" d="M25 65.5 29.4 74h-8.9z"/><path fill="#7fb21a" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><path fill="#1297d9" transform="translate(307 0) scale(-1 1)" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><text class="logo-tag" x="88" y="122.6" text-anchor="middle" textLength="166" lengthAdjust="spacingAndGlyphs">SOFTWARE SERVICES</text></svg></div>
+      <div class="pre-count">000</div>
+      <div class="pre-bar"><i></i></div>
+      <div class="pre-log">&gt; booting</div>
+    </div>
   </div>
-  <script src="script.js"></script>
+
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+  <header class="nav" id="nav">
+    <div class="nav-bar">
+      <a class="brand" href="index.html" aria-label="Apex Software Services home"><svg class="logo" viewBox="0 63 176 62" role="img" aria-label="Apex Software Services"><g fill="currentColor"><path d="M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z"/><path d="M51.5 66H77a9.5 9.5 0 0 1 9.5 9.5v7A9.5 9.5 0 0 1 77 92H63.5q-2.5 0-2.5 2.5V109h-9.5V92.5A9.5 9.5 0 0 1 61 83h12.5a4 4 0 0 0 0-8h-22z"/><path d="M126.5 66H101a10 10 0 0 0-10 10v6q0 3 4.5 5.5-4.5 2.5-4.5 5.5v6a10 10 0 0 0 10 10h25.5v-9h-21a4 4 0 0 1 0-8h21v-9h-21a4 4 0 0 1 0-8h21z"/></g><path fill="#84b81b" d="M25 65.5 29.4 74h-8.9z"/><path fill="#7fb21a" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><path fill="#1297d9" transform="translate(307 0) scale(-1 1)" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><text class="logo-tag" x="88" y="122.6" text-anchor="middle" textLength="166" lengthAdjust="spacingAndGlyphs">SOFTWARE SERVICES</text></svg></a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <i class="nav-glider" aria-hidden="true"></i>
+        <a class="nav-link active" href="index.html">Home</a>
+        <div class="nav-item has-mega">
+          <a class="nav-link" href="services.html" id="megaBtn" aria-haspopup="true" aria-expanded="false" aria-controls="mega">Services<svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+        <div class="mega" id="mega">
+            <div class="mega-inner">
+            <div class="mega-col" data-tone="blue" data-focus="laptop">
+              <a class="mega-head" href="software.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><strong>Software &amp; Cloud</strong><span>Products and platforms, engineered to last.</span></a>
+              <a class="mega-item" href="software.html#saas"><strong>SaaS Applications</strong><span>Subscription products, ready to sell.</span></a>
+              <a class="mega-item" href="software.html#custom"><strong>Custom Software</strong><span>Portals, workflows and internal tools.</span></a>
+              <a class="mega-item" href="software.html#mobile"><strong>Mobile &amp; Tablet Apps</strong><span>Apps for phones and tablets.</span></a>
+              <a class="mega-item" href="software.html#desktop"><strong>Desktop Apps</strong><span>Software for your team&rsquo;s machines.</span></a>
+              <a class="mega-item" href="software.html#cloud"><strong>Cloud &amp; APIs</strong><span>Secure backends, integrations, pipelines.</span></a>
+              <a class="mega-item" href="software.html#ui"><strong>UI/UX &amp; Front-End</strong><span>Interfaces people enjoy using.</span></a>
+              <a class="mega-item" href="software.html#modern"><strong>Modernization</strong><span>Upgrade ageing systems, safely.</span></a>
+              <a class="mega-item" href="software.html#consult"><strong>Technical Consulting</strong><span>Architecture, roadmaps and reviews.</span></a>
+            </div>
+            <div class="mega-col" data-tone="green" data-focus="server">
+              <a class="mega-head" href="ai.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/><rect x="10" y="10" width="4" height="4" rx=".5"/></svg><strong>AI &amp; Hardware</strong><span>Private AI, and the machines to run it.</span></a>
+              <a class="mega-item" href="ai.html#server"><strong>Local AI Servers</strong><span>On-premises AI servers, built for you.</span></a>
+              <a class="mega-item" href="ai.html#workstation"><strong>Custom Workstations</strong><span>Built for design, AI or gaming.</span></a>
+              <a class="mega-item" href="ai.html#agents"><strong>Local Agents</strong><span>AI agents inside your own network.</span></a>
+              <a class="mega-item" href="ai.html#training"><strong>Local Model Training</strong><span>Models trained on your own data.</span></a>
+              <a class="mega-item" href="ai.html#team"><strong>AI Training for Teams</strong><span>Make your people productive with AI.</span></a>
+            </div>
+            <div class="mega-col" data-tone="orange" data-focus="studio">
+              <a class="mega-head" href="studio.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9.5 5 2.5-5 2.5z"/></svg><strong>Apex Studio</strong><span>Websites, films and games people remember.</span></a>
+              <a class="mega-item" href="studio.html#website"><strong>High-End Websites</strong><span>Immersive, interactive sites like this.</span></a>
+              <a class="mega-item" href="studio.html#film"><strong>Animated Product Commercials</strong><span>3D films that show what you make.</span></a>
+              <a class="mega-item" href="studio.html#game"><strong>Educational Games</strong><span>Games that teach, for class or training.</span></a>
+            </div>
+              <aside class="mega-side">
+                <p class="mega-kicker">Not sure where it fits?</p>
+                <p>Tell us what you are trying to build. We will tell you which pieces you need &mdash; and which you do not.</p>
+                <a class="btn btn-primary btn-sm" href="contact.html">Free consultation <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                <a class="mega-all" href="services.html">All services <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="careers.html">Careers</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="nav-clock" title="Local time at Apex, Chicago"><i></i><b id="clock">CHI --:--</b></span>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour mode" title="Switch colour mode">
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        </button>
+        <a class="btn btn-primary btn-sm nav-cta" href="contact.html" data-magnetic>Start a project</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  <div class="mega-veil" aria-hidden="true"></div>
+
+  <nav class="rail" id="rail" aria-label="Chapters"></nav>
+  <div class="hud hud-left" aria-hidden="true"><span id="hudChapter"></span></div>
+  <div class="hud hud-right" aria-hidden="true"><span id="hudPct">000%</span></div>
+
+  <main>
+    <section class="chapter hero" id="top" data-shape="cpu" data-pos="right" data-chapter="Apex">
+      <div class="wrap">
+        <div class="col">
+          <p class="kicker rv" data-scramble>Software &middot; AI &middot; Cloud &middot; Hardware</p>
+          <h1 class="display rv">
+            <span class="ln"><span>Your idea,</span></span>
+            <span class="ln"><span>engineered to</span></span>
+            <span class="ln"><span>its <b class="glow">apex.</b></span></span>
+          </h1>
+          <p class="lead rv">Apex Software Services designs, builds and ships software, private AI, cloud platforms and the hardware they run on &mdash; reliably, and fast.</p>
+          <div class="actions rv">
+            <a class="btn btn-primary" href="contact.html" data-magnetic>Book a free consultation <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-ghost" href="#services" data-magnetic>See what we build</a>
+          </div>
+          <dl class="facts rv">
+            <div><dt>20+</dt><dd>years building applications, products and consulting</dd></div>
+            <div><dt>3</dt><dd>studios: software &amp; cloud, AI &amp; hardware, creative</dd></div>
+            <div><dt>1</dt><dd>accountable team from idea to launch</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span>Scroll</span><i></i></div>
+      <p class="hint" aria-hidden="true">Move to probe the board &middot; Click to send a surge</p>
+    </section>
+
+    <section class="chapter explorer" id="services" data-shape="forge" data-pos="right" data-raise="true" data-seg="44" data-chapter="Build">
+      <div class="explorer-pin">
+        <div class="wrap explorer-wrap">
+          <div class="explorer-copy">
+            <p class="kicker" data-scramble>02 &mdash; What we build</p>
+            <h2 class="title">Three studios. One <b class="glow">team.</b></h2>
+            <p class="copy">Scroll to watch each one come together.</p>
+            <ol class="svc-list">
+            <li class="svc" id="saas" data-build="saas" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">01</span><span class="svc-t">Software &amp; Cloud</span><span class="svc-s">Products and platforms, engineered to last.</span></button>
+              <div class="svc-body"><p>Web, mobile, desktop and cloud software, designed around your business and shipped in stages you can see.</p><ul class="tags"><li>SaaS Applications</li><li>Custom Software</li><li>Mobile &amp; Tablet Apps</li><li>Desktop Apps</li><li>Cloud &amp; APIs</li><li>UI/UX &amp; Front-End</li></ul><a class="link" href="software.html">Explore Software &amp; Cloud <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="workstation" data-build="workstation" data-tone="green">
+              <button class="svc-head" type="button"><span class="svc-n">02</span><span class="svc-t">AI &amp; Hardware</span><span class="svc-s">Private AI, and the machines to run it.</span></button>
+              <div class="svc-body"><p>We build the servers and workstations, deploy the agents, train the models and train your people &mdash; so AI works inside your business, on hardware you own.</p><ul class="tags"><li>Local AI Servers</li><li>Custom Workstations</li><li>Local Agents</li><li>Local Model Training</li><li>AI Training for Teams</li></ul><a class="link" href="ai.html">Explore AI &amp; Hardware <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="website" data-build="website" data-tone="orange">
+              <button class="svc-head" type="button"><span class="svc-n">03</span><span class="svc-t">Apex Studio</span><span class="svc-s">Websites, films and games people remember.</span></button>
+              <div class="svc-body"><p>The things your customers see first, built by the same engineers &mdash; so what looks extraordinary also loads fast and works everywhere.</p><ul class="tags"><li>High-End Websites</li><li>Animated Product Commercials</li><li>Educational Games</li></ul><a class="link" href="studio.html">Explore Apex Studio <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            </ol>
+          </div>
+          <aside class="spec glass" aria-live="polite">
+            <div class="asm-row"><span>Assembling</span><b class="asm-pct">0%</b></div>
+            <div class="asm-bar"><i></i></div>
+            <h3 class="spec-title" id="specTitle"></h3>
+            <div class="spec-body" id="specBody"></div>
+          </aside>
+        </div>
+        <div class="asm" aria-hidden="true">
+          <div class="asm-row"><span>Assembling</span><b class="asm-pct">0%</b></div>
+          <div class="asm-bar"><i></i></div>
+          <em class="asm-name"></em>
+        </div>
+        <p class="explorer-hint" aria-hidden="true">Scroll or pick a service &mdash; watch it come together</p>
+      </div>
+    </section>
+
+    <section class="chapter" id="lab" data-shape="tablet" data-pos="left" data-chapter="Try it">
+      <div class="wrap">
+        <div class="col col-right col-wide">
+          <p class="kicker rv" data-scramble>03 &mdash; Try it yourself</p>
+          <h2 class="title rv">Don&rsquo;t take our word for it. <b class="glow">Play.</b></h2>
+          <div class="lab glass rv" id="labTabs">
+            <div class="lab-tabs" role="tablist" aria-label="Interactive demos">
+              <button class="lab-tab on" role="tab" aria-selected="true" aria-controls="labGame" id="tabGame" type="button">Educational game</button>
+              <button class="lab-tab" role="tab" aria-selected="false" aria-controls="labTerm" id="tabTerm" type="button">Apex console</button>
+              <span class="lab-note" id="labNote">Name the hidden logic gate. Five chips, about a minute.</span>
+            </div>
+            <div class="lab-panel" id="labGame" role="tabpanel" aria-labelledby="tabGame">
+            <div class="game" id="game">
+              <div class="game-top"><strong>Mystery Chip</strong><span>Chip <b id="gRound">1</b>/5 &middot; First-try solves <b id="gScore">0</b></span></div>
+              <svg class="game-board" viewBox="0 0 440 170" role="group" aria-label="Circuit: two switches feed a hidden logic gate that drives a lamp">
+                <path class="wire" id="gWireA" d="M96 48H150V66H196" /><path class="wire" id="gWireB" d="M96 122H150V104H196" /><path class="wire" id="gWireO" d="M284 85H352" />
+                <g class="sw" id="gSwA" tabindex="0" role="switch" aria-checked="false" aria-label="Input A"><rect x="34" y="34" width="62" height="28" rx="14"/><circle cx="48" cy="48" r="10"/><text x="16" y="53">A</text></g>
+                <g class="sw" id="gSwB" tabindex="0" role="switch" aria-checked="false" aria-label="Input B"><rect x="34" y="108" width="62" height="28" rx="14"/><circle cx="48" cy="122" r="10"/><text x="16" y="127">B</text></g>
+                <g class="gate"><rect x="196" y="40" width="88" height="90" rx="12"/><text id="gGate" x="240" y="94">?</text>
+                  <path d="M210 40v-8M226 40v-8M254 40v-8M270 40v-8M210 138v-8M226 138v-8M254 138v-8M270 138v-8"/></g>
+                <g class="lamp" id="gLamp"><circle class="halo" cx="382" cy="85" r="34"/><circle class="bulb" cx="382" cy="85" r="20"/><text x="382" y="140">OUT</text></g>
+              </svg>
+              <div class="game-row">
+                <table class="truth" aria-label="What you have discovered so far">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody id="gTruth"></tbody>
+                </table>
+                <div class="game-side">
+                  <p class="game-msg" id="gMsg" aria-live="polite">Flip the switches and watch the lamp.</p>
+                  <div class="game-choices" id="gChoices" aria-label="Which gate is it?"></div>
+                  <button class="btn btn-ghost btn-sm" id="gNext" type="button" hidden>Next chip</button>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="lab-panel" id="labTerm" role="tabpanel" aria-labelledby="tabTerm" hidden>
+            <div class="term" id="term">
+              <div class="term-bar"><span class="lights"><i></i><i></i><i></i></span><span class="term-title">guest@apex: ~</span></div>
+              <div class="term-out" aria-live="polite"></div>
+              <form class="term-form" autocomplete="off">
+                <label for="termInput" class="tp">&#10095;</label>
+                <input id="termInput" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="type help" aria-label="Terminal command" />
+              </form>
+              <div class="cmds" aria-label="Terminal shortcuts">
+                <button type="button" data-cmd="services">services</button>
+                <button type="button" data-cmd="ai">ai</button>
+                <button type="button" data-cmd="studio">studio</button>
+                <button type="button" data-cmd="surge">surge</button>
+                <button type="button" data-cmd="contact">contact</button>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="process" data-shape="bus" data-pos="center" data-dim="0.3" data-chapter="How">
+      <div class="wrap">
+        <header class="head rv">
+          <p class="kicker" data-scramble>04 &mdash; Reliable. Fast.</p>
+          <h2 class="title">A clear path from idea to <b class="glow">launch.</b></h2>
+          <p class="copy">More than twenty years of building has taught us that reliable delivery is a process, not a promise. This is ours.</p>
+        </header>
+        <ol class="steps" data-stagger>
+          <li class="step rv"><span class="step-n">01</span><h3>Discover</h3><p>We learn the business first: users, pain points, goals, and what success looks like.</p></li>
+          <li class="step rv"><span class="step-n">02</span><h3>Design</h3><p>A clear scope and a phased roadmap, with interfaces and architecture to match.</p></li>
+          <li class="step rv"><span class="step-n">03</span><h3>Build</h3><p>Short cycles with demos you can use, in software, models and machines.</p></li>
+          <li class="step rv"><span class="step-n">04</span><h3>Launch</h3><p>We take it to production and stay until your users have adopted it.</p></li>
+          <li class="step rv"><span class="step-n">05</span><h3>Evolve</h3><p>Improvements, support and advice. The loop keeps turning.</p></li>
+        </ol>
+        <p class="more rv"><a class="link" href="about.html">More about how we work <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      </div>
+    </section>
+
+    <section class="chapter finale" id="contact" data-shape="dive" data-pos="center" data-chapter="Launch">
+      <div class="wrap center">
+        <p class="kicker rv" data-scramble>05 &mdash; Ready to build?</p>
+        <h2 class="display rv"><span class="ln"><span>Let&rsquo;s build</span></span><span class="ln"><span>what&rsquo;s <b class="glow">next.</b></span></span></h2>
+        <p class="lead rv">Tell us what you want to build. Every inquiry goes straight to the people who will work on it.</p>
+        <div class="actions rv"><a class="btn btn-primary btn-lg" href="contact.html" data-magnetic>Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost btn-lg" href="mailto:info@apexss.com" data-magnetic>info@apexss.com</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Apex Software Services home"><svg class="logo" viewBox="0 63 176 62" role="img" aria-label="Apex Software Services"><g fill="currentColor"><path d="M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z"/><path d="M51.5 66H77a9.5 9.5 0 0 1 9.5 9.5v7A9.5 9.5 0 0 1 77 92H63.5q-2.5 0-2.5 2.5V109h-9.5V92.5A9.5 9.5 0 0 1 61 83h12.5a4 4 0 0 0 0-8h-22z"/><path d="M126.5 66H101a10 10 0 0 0-10 10v6q0 3 4.5 5.5-4.5 2.5-4.5 5.5v6a10 10 0 0 0 10 10h25.5v-9h-21a4 4 0 0 1 0-8h21v-9h-21a4 4 0 0 1 0-8h21z"/></g><path fill="#84b81b" d="M25 65.5 29.4 74h-8.9z"/><path fill="#7fb21a" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><path fill="#1297d9" transform="translate(307 0) scale(-1 1)" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><text class="logo-tag" x="88" y="122.6" text-anchor="middle" textLength="166" lengthAdjust="spacingAndGlyphs">SOFTWARE SERVICES</text></svg></a>
+        <p>Software, private AI, cloud platforms and the hardware they run on &mdash; plus the websites, films and games that bring them to life.</p>
+        <p class="footer-meta">Chicago, Illinois &middot; <a href="mailto:info@apexss.com">info@apexss.com</a></p>
+      </div>
+      <div><h4>Software &amp; Cloud</h4><a href="software.html#saas">SaaS Applications</a><a href="software.html#custom">Custom Software</a><a href="software.html#mobile">Mobile &amp; Tablet Apps</a><a href="software.html#desktop">Desktop Apps</a><a href="software.html#cloud">Cloud &amp; APIs</a></div>
+      <div><h4>AI &amp; Hardware</h4><a href="ai.html#server">Local AI Servers</a><a href="ai.html#workstation">Custom Workstations</a><a href="ai.html#agents">Local Agents</a><a href="ai.html#training">Local Model Training</a><a href="ai.html#team">AI Training for Teams</a></div>
+      <div><h4>Apex Studio</h4><a href="studio.html#website">High-End Websites</a><a href="studio.html#film">Animated Product Commercials</a><a href="studio.html#game">Educational Games</a></div>
+      <div><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="services.html">All services</a></div>
+    </div>
+    <div class="wrap footer-base"><span>&copy; <span class="year"></span> Apex Software Services. All rights reserved.</span><span>Built in-house by Apex Studio.</span></div>
+  </footer>
+
+  <script type="module" src="js/ui.js"></script>
 </body>
 </html>

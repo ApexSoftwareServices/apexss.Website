@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software &amp; Cloud | Apex Software Services</title>
+  <meta name="description" content="SaaS applications, custom software, mobile and tablet apps, desktop apps, cloud and APIs, UI/UX, modernization and consulting." />
+  <meta name="theme-color" content="#f3f5fa" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 61 55 55'%3E%3Crect x='-3' y='61' width='55' height='55' rx='12' fill='%23fff'/%3E%3Cpath d='M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z' fill='%23282828'/%3E%3Cpath d='M25 65.500 29.400 74h-8.900z' fill='%2384b81b'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Rokkitt:wght@800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function (d) {
+      var t = 'light';
+      try { t = localStorage.getItem('apex-theme') || 'light'; } catch (e) {}
+      d.dataset.theme = t === 'dark' ? 'dark' : 'light';
+      if ('noModule' in HTMLScriptElement.prototype) d.classList.add('js');
+    })(document.documentElement);
+  </script>
+  <script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js", "three/addons/": "./vendor/addons/" } }</script>
+</head>
+<body>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+  <header class="nav" id="nav">
+    <div class="nav-bar">
+      <a class="brand" href="index.html" aria-label="Apex Software Services home"><svg class="logo" viewBox="0 63 176 62" role="img" aria-label="Apex Software Services"><g fill="currentColor"><path d="M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z"/><path d="M51.5 66H77a9.5 9.5 0 0 1 9.5 9.5v7A9.5 9.5 0 0 1 77 92H63.5q-2.5 0-2.5 2.5V109h-9.5V92.5A9.5 9.5 0 0 1 61 83h12.5a4 4 0 0 0 0-8h-22z"/><path d="M126.5 66H101a10 10 0 0 0-10 10v6q0 3 4.5 5.5-4.5 2.5-4.5 5.5v6a10 10 0 0 0 10 10h25.5v-9h-21a4 4 0 0 1 0-8h21v-9h-21a4 4 0 0 1 0-8h21z"/></g><path fill="#84b81b" d="M25 65.5 29.4 74h-8.9z"/><path fill="#7fb21a" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><path fill="#1297d9" transform="translate(307 0) scale(-1 1)" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><text class="logo-tag" x="88" y="122.6" text-anchor="middle" textLength="166" lengthAdjust="spacingAndGlyphs">SOFTWARE SERVICES</text></svg></a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <i class="nav-glider" aria-hidden="true"></i>
+        <a class="nav-link" href="index.html">Home</a>
+        <div class="nav-item has-mega">
+          <a class="nav-link active" href="services.html" id="megaBtn" aria-haspopup="true" aria-expanded="false" aria-controls="mega">Services<svg class="caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+        <div class="mega" id="mega">
+            <div class="mega-inner">
+            <div class="mega-col" data-tone="blue" data-focus="laptop">
+              <a class="mega-head" href="software.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><strong>Software &amp; Cloud</strong><span>Products and platforms, engineered to last.</span></a>
+              <a class="mega-item" href="software.html#saas"><strong>SaaS Applications</strong><span>Subscription products, ready to sell.</span></a>
+              <a class="mega-item" href="software.html#custom"><strong>Custom Software</strong><span>Portals, workflows and internal tools.</span></a>
+              <a class="mega-item" href="software.html#mobile"><strong>Mobile &amp; Tablet Apps</strong><span>Apps for phones and tablets.</span></a>
+              <a class="mega-item" href="software.html#desktop"><strong>Desktop Apps</strong><span>Software for your team&rsquo;s machines.</span></a>
+              <a class="mega-item" href="software.html#cloud"><strong>Cloud &amp; APIs</strong><span>Secure backends, integrations, pipelines.</span></a>
+              <a class="mega-item" href="software.html#ui"><strong>UI/UX &amp; Front-End</strong><span>Interfaces people enjoy using.</span></a>
+              <a class="mega-item" href="software.html#modern"><strong>Modernization</strong><span>Upgrade ageing systems, safely.</span></a>
+              <a class="mega-item" href="software.html#consult"><strong>Technical Consulting</strong><span>Architecture, roadmaps and reviews.</span></a>
+            </div>
+            <div class="mega-col" data-tone="green" data-focus="server">
+              <a class="mega-head" href="ai.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/><rect x="10" y="10" width="4" height="4" rx=".5"/></svg><strong>AI &amp; Hardware</strong><span>Private AI, and the machines to run it.</span></a>
+              <a class="mega-item" href="ai.html#server"><strong>Local AI Servers</strong><span>On-premises AI servers, built for you.</span></a>
+              <a class="mega-item" href="ai.html#workstation"><strong>Custom Workstations</strong><span>Built for design, AI or gaming.</span></a>
+              <a class="mega-item" href="ai.html#agents"><strong>Local Agents</strong><span>AI agents inside your own network.</span></a>
+              <a class="mega-item" href="ai.html#training"><strong>Local Model Training</strong><span>Models trained on your own data.</span></a>
+              <a class="mega-item" href="ai.html#team"><strong>AI Training for Teams</strong><span>Make your people productive with AI.</span></a>
+            </div>
+            <div class="mega-col" data-tone="orange" data-focus="studio">
+              <a class="mega-head" href="studio.html"><svg class="mega-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9.5 5 2.5-5 2.5z"/></svg><strong>Apex Studio</strong><span>Websites, films and games people remember.</span></a>
+              <a class="mega-item" href="studio.html#website"><strong>High-End Websites</strong><span>Immersive, interactive sites like this.</span></a>
+              <a class="mega-item" href="studio.html#film"><strong>Animated Product Commercials</strong><span>3D films that show what you make.</span></a>
+              <a class="mega-item" href="studio.html#game"><strong>Educational Games</strong><span>Games that teach, for class or training.</span></a>
+            </div>
+              <aside class="mega-side">
+                <p class="mega-kicker">Not sure where it fits?</p>
+                <p>Tell us what you are trying to build. We will tell you which pieces you need &mdash; and which you do not.</p>
+                <a class="btn btn-primary btn-sm" href="contact.html">Free consultation <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                <a class="mega-all" href="services.html">All services <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              </aside>
+            </div>
+          </div>
+        </div>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="careers.html">Careers</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <span class="nav-clock" title="Local time at Apex, Chicago"><i></i><b id="clock">CHI --:--</b></span>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch colour mode" title="Switch colour mode">
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+        </button>
+        <a class="btn btn-primary btn-sm nav-cta" href="contact.html" data-magnetic>Start a project</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><i></i><i></i></button>
+      </div>
+    </div>
+  </header>
+  <div class="mega-veil" aria-hidden="true"></div>
+
+  <main>
+    <section class="chapter explorer" id="services" data-shape="forge" data-pos="right" data-raise="true" data-seg="30">
+      <div class="explorer-pin">
+        <div class="wrap explorer-wrap">
+          <div class="explorer-copy">
+            <p class="kicker" data-scramble>Software &amp; Cloud</p>
+            <h1 class="title">Products and platforms, engineered to <b class="glow">last.</b></h1>
+            <p class="copy">Web, mobile, desktop and cloud software, designed around your business and shipped in stages you can see.</p>
+            <ol class="svc-list">
+            <li class="svc" id="saas" data-build="saas" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">01</span><span class="svc-t">SaaS Applications</span><span class="svc-s">Subscription-ready products with tenants, roles and billing.</span></button>
+              <div class="svc-body"><p>Multi-tenant products with user roles, dashboards, notifications, billing, reporting and admin tools &mdash; ready to sell on day one.</p><ul class="tags"><li>Multi-tenant</li><li>Subscriptions</li><li>Admin</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="custom" data-build="custom" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">02</span><span class="svc-t">Custom Software</span><span class="svc-s">Portals, workflows and internal tools built around your process.</span></button>
+              <div class="svc-body"><p>Replace disconnected spreadsheets and manual work with workflow systems, customer portals, internal tools and operational dashboards.</p><ul class="tags"><li>Portals</li><li>Workflows</li><li>Automation</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="mobile" data-build="mobile" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">03</span><span class="svc-t">Mobile &amp; Tablet Apps</span><span class="svc-s">Apps for phones and tablets that feel right in the hand.</span></button>
+              <div class="svc-body"><p>iOS and Android apps for phones and tablets: designed for touch, fast on real devices, and connected to the same backend as your web product.</p><ul class="tags"><li>iOS</li><li>Android</li><li>Tablet</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="desktop" data-build="desktop" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">04</span><span class="svc-t">Desktop Apps</span><span class="svc-s">Dependable applications that live on your team&rsquo;s machines.</span></button>
+              <div class="svc-body"><p>Installable desktop applications for the work that needs power, offline access or deep integration with the machines your team uses.</p><ul class="tags"><li>Windows</li><li>Offline-ready</li><li>Integrations</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="cloud" data-build="cloud" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">05</span><span class="svc-t">Cloud &amp; APIs</span><span class="svc-s">Secure, scalable backends, integrations and data pipelines.</span></button>
+              <div class="svc-body"><p>Secure APIs, cloud-native backends, integrations, data pipelines, background jobs and reporting services, designed to scale.</p><ul class="tags"><li>Azure</li><li>AWS</li><li>REST APIs</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="ui" data-build="ui" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">06</span><span class="svc-t">UI/UX &amp; Front-End</span><span class="svc-s">Polished, responsive interfaces people enjoy using.</span></button>
+              <div class="svc-body"><p>Intuitive flows, design systems and reusable components, built into responsive front-ends that are a pleasure to use.</p><ul class="tags"><li>Angular</li><li>React</li><li>Design systems</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="modern" data-build="modern" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">07</span><span class="svc-t">Modernization</span><span class="svc-s">Upgrade ageing systems without stopping the business.</span></button>
+              <div class="svc-body"><p>Upgrade frameworks, clean up architecture, improve performance and security, and pay down technical debt &mdash; in stages, while the system keeps running.</p><ul class="tags"><li>Performance</li><li>Security</li><li>Refactoring</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            <li class="svc" id="consult" data-build="consult" data-tone="blue">
+              <button class="svc-head" type="button"><span class="svc-n">08</span><span class="svc-t">Technical Consulting</span><span class="svc-s">Senior guidance on architecture, roadmaps and delivery.</span></button>
+              <div class="svc-body"><p>Senior guidance on architecture, product roadmaps, cloud decisions, code quality, delivery standards and implementation strategy.</p><ul class="tags"><li>Roadmaps</li><li>Architecture</li><li>Reviews</li></ul><a class="link" href="contact.html">Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+            </li>
+            </ol>
+          </div>
+          <aside class="spec glass" aria-live="polite">
+            <div class="asm-row"><span>Assembling</span><b class="asm-pct">0%</b></div>
+            <div class="asm-bar"><i></i></div>
+            <h3 class="spec-title" id="specTitle"></h3>
+            <div class="spec-body" id="specBody"></div>
+          </aside>
+        </div>
+        <div class="asm" aria-hidden="true">
+          <div class="asm-row"><span>Assembling</span><b class="asm-pct">0%</b></div>
+          <div class="asm-bar"><i></i></div>
+          <em class="asm-name"></em>
+        </div>
+        <p class="explorer-hint" aria-hidden="true">Scroll or pick a service &mdash; watch it come together</p>
+      </div>
+    </section>
+
+    <section class="chapter finale" id="contact" data-shape="dive" data-pos="center">
+      <div class="wrap center">
+        <p class="kicker rv" data-scramble>Software &amp; Cloud</p>
+        <h2 class="display rv"><span class="ln"><span>Tell us what</span></span><span class="ln"><span>you need <b class="glow">built.</b></span></span></h2>
+        <p class="lead rv">Share the goal, the constraints and the timeline. We will come back with a plan.</p>
+        <div class="actions rv"><a class="btn btn-primary btn-lg" href="contact.html" data-magnetic>Start a project <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Apex Software Services home"><svg class="logo" viewBox="0 63 176 62" role="img" aria-label="Apex Software Services"><g fill="currentColor"><path d="M2.2 109 20.5 74h8.9L47.3 109H36.3L29.2 95.2l-4.45 4.6-4.45-4.6L13 109z"/><path d="M51.5 66H77a9.5 9.5 0 0 1 9.5 9.5v7A9.5 9.5 0 0 1 77 92H63.5q-2.5 0-2.5 2.5V109h-9.5V92.5A9.5 9.5 0 0 1 61 83h12.5a4 4 0 0 0 0-8h-22z"/><path d="M126.5 66H101a10 10 0 0 0-10 10v6q0 3 4.5 5.5-4.5 2.5-4.5 5.5v6a10 10 0 0 0 10 10h25.5v-9h-21a4 4 0 0 1 0-8h21v-9h-21a4 4 0 0 1 0-8h21z"/></g><path fill="#84b81b" d="M25 65.5 29.4 74h-8.9z"/><path fill="#7fb21a" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><path fill="#1297d9" transform="translate(307 0) scale(-1 1)" d="M133 66h7a8 8 0 0 1 8 8v8.5q0 2 2 2t2 2v2q0 2-2 2t-2 2V101a8 8 0 0 1-8 8h-7v-8h2.5q1.5 0 1.5-1.5V92q0-2 2.5-2.5v-4Q137 85 137 83v-7.5q0-1.5-1.5-1.5H133z"/><text class="logo-tag" x="88" y="122.6" text-anchor="middle" textLength="166" lengthAdjust="spacingAndGlyphs">SOFTWARE SERVICES</text></svg></a>
+        <p>Software, private AI, cloud platforms and the hardware they run on &mdash; plus the websites, films and games that bring them to life.</p>
+        <p class="footer-meta">Chicago, Illinois &middot; <a href="mailto:info@apexss.com">info@apexss.com</a></p>
+      </div>
+      <div><h4>Software &amp; Cloud</h4><a href="software.html#saas">SaaS Applications</a><a href="software.html#custom">Custom Software</a><a href="software.html#mobile">Mobile &amp; Tablet Apps</a><a href="software.html#desktop">Desktop Apps</a><a href="software.html#cloud">Cloud &amp; APIs</a></div>
+      <div><h4>AI &amp; Hardware</h4><a href="ai.html#server">Local AI Servers</a><a href="ai.html#workstation">Custom Workstations</a><a href="ai.html#agents">Local Agents</a><a href="ai.html#training">Local Model Training</a><a href="ai.html#team">AI Training for Teams</a></div>
+      <div><h4>Apex Studio</h4><a href="studio.html#website">High-End Websites</a><a href="studio.html#film">Animated Product Commercials</a><a href="studio.html#game">Educational Games</a></div>
+      <div><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="services.html">All services</a></div>
+    </div>
+    <div class="wrap footer-base"><span>&copy; <span class="year"></span> Apex Software Services. All rights reserved.</span><span>Built in-house by Apex Studio.</span></div>
+  </footer>
+
+  <script type="module" src="js/ui.js"></script>
+</body>
+</html>
