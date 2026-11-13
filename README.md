@@ -41,6 +41,12 @@ Each `<section>` opts in with:
 In a service explorer, each `<li class="svc">` names its build with `data-build` (a key in `js/forge.js`) and its
 colour with `data-tone` (`blue`, `green`, `orange`).
 
+## Analytics
+
+Every page loads the Google Tag Manager container `GTM-NQJ5MPGJ` from a short block at the top of its `<head>`.
+The pages are edited by hand, so a change to that block (a new container ID, or removing it) has to be made in all eight HTML files.
+What gets recorded is decided inside Tag Manager: the container needs a published Google Analytics tag for visits to show up in Analytics.
+
 ## Careers
 
 Edit `js/careers.js`. Set a job's `status` to `open` to list it with an Apply button, or `filled` to show it as closed.
