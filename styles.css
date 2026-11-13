@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Apex Software Services — interface
+   Apex Software Services: interface
    ========================================================================== */
 
 @property --accent { syntax: '<color>'; inherits: true; initial-value: #3fc0ff; }
@@ -320,6 +320,17 @@ a.value:hover { transform: translateY(-4px); border-color: var(--accent); }
 .svc.on .svc-body, html:not(.js) .svc-body { display: block; animation: tlIn 0.4s ease both; }
 .svc-body .link { margin-top: 12px; font-size: 0.88rem; }
 .svc-body .tags { margin-top: 10px; }
+/* nine or more services: tighter rows, so the open one still fits on one screen */
+@media (min-width: 900px) {
+  .svc-list:has(> .svc:nth-child(9)) { margin-top: 12px; gap: 0; }
+  .svc-list:has(> .svc:nth-child(9)) .svc-head { padding: 5px 12px; }
+  .svc-list:has(> .svc:nth-child(9)) .svc.on .svc-head { padding: 10px 14px 2px; }
+  .svc-list:has(> .svc:nth-child(9)) .svc-t { font-size: 1rem; }
+  .svc-list:has(> .svc:nth-child(9)) .svc.on .svc-t { font-size: 1.08rem; }
+  .svc-list:has(> .svc:nth-child(9)) .svc-body { font-size: 0.88rem; padding-bottom: 12px; }
+  .svc-list:has(> .svc:nth-child(9)) .svc-body .tags { margin-top: 8px; }
+  .svc-list:has(> .svc:nth-child(9)) .svc-body .link { margin-top: 8px; }
+}
 .spec { display: none; }
 /* assembly read-out beside the build */
 .asm { position: absolute; right: max(var(--pad), calc((100vw - var(--max)) / 2)); bottom: 46px; width: 250px; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
@@ -429,6 +440,7 @@ html:not(.js) .asm { display: none; }
 .field input[type='file'] { padding: 10px; font-size: 0.9rem; }
 .form .btn { width: 100%; }
 .form-note { font-size: 0.84rem; color: var(--muted); min-height: 1.2em; }
+.form-hint { font-size: 0.8rem; color: var(--muted); }
 .contact-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 26px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .contact-meta .link { font-family: var(--display); font-size: 1.05rem; letter-spacing: 0; text-transform: none; }
 
@@ -445,12 +457,17 @@ html:not(.js) .asm { display: none; }
 .jobs-list { display: grid; gap: 0; }
 .job { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 12px 2px; border-top: 1px solid var(--line); }
 .job strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
-.job span { font-size: 0.8rem; color: var(--muted); }
+.job span { display: block; font-size: 0.8rem; color: var(--muted); }
 .job em { flex: none; font-style: normal; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
 .job.filled strong { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--ink) 30%, transparent); }
 .job.open em { border-color: var(--accent); color: var(--accent); }
 .job .btn { flex: none; }
 .jobs-foot { margin-top: 12px; font-size: 0.8rem; color: var(--faint); }
+.jobs-done { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--accent) 9%, transparent); font-size: 0.94rem; color: var(--ink-2); }
+.jobs-done[hidden] { display: none; }
+.jobs-done svg { flex: none; width: 22px; height: 22px; margin-top: 1px; fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.jobs-done strong { color: var(--ink); }
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .apply { width: min(640px, calc(100vw - 28px)); max-height: calc(100vh - 28px); padding: 0; border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent); border-radius: 22px; background: var(--bg); color: var(--ink); box-shadow: 0 50px 120px -30px rgba(0, 0, 0, 0.7); }
 .apply::backdrop { background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px); }
 .apply-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }

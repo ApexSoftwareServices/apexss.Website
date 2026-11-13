@@ -231,6 +231,22 @@ export const ART = {
     else if (name === 'cal') { x.strokeRect(66, 76, 124, 104); k.line(66, 108, 190, 108, color, 12); k.line(98, 60, 98, 86, color, 12); k.line(158, 60, 158, 86, color, 12); }
     else if (name === 'check') { x.beginPath(); x.moveTo(74, 132); x.lineTo(112, 168); x.lineTo(184, 92); x.stroke(); }
   }),
+  // several interface layers flattened into one finished screen
+  flat: (key, ...parts) => tex('flat-' + key, W, H, (k, w, h, x) => { for (const t of parts) x.drawImage(t.image, 0, 0, w, h); }),
+  // a staff ID badge for the contractors and consultants build
+  badge: (label, color) => tex('badge-' + label, 512, 720, (k, w, h, x) => {
+    k.rr(0, 0, w, h, 40, '#ffffff');
+    x.save(); x.beginPath(); x.roundRect(0, 0, w, h, 40); x.clip(); x.fillStyle = color; x.fillRect(0, 0, w, 150); x.restore();
+    k.rr(w / 2 - 62, 30, 124, 24, 12, 'rgba(8,14,26,0.55)');
+    const lk = 1.5; drawLogo(x, (w - LOGO.width * lk) / 2, 74, lk, '#ffffff', { green: '#ffffff', blue: '#ffffff' });
+    k.dot(w / 2, 300, 104, '#e6eaf2');
+    x.save(); x.beginPath(); x.arc(w / 2, 300, 104, 0, 7); x.clip();
+    k.dot(w / 2, 272, 40, '#a9b3c6'); x.beginPath(); x.ellipse(w / 2, 396, 82, 72, 0, 0, 7); x.fillStyle = '#a9b3c6'; x.fill(); x.restore();
+    k.h(label.toUpperCase(), w / 2, 462, 46, C.ink, 'center');
+    k.t('Apex Software Services', w / 2, 514, 24, C.muted, 500, BODY, 'center');
+    k.line(60, 562, w - 60, 562, C.line, 3);
+    let bx = 76; for (let i = 0; bx < w - 84; i++) { const bw = 3 + ((i * 7) % 4) * 3; k.rr(bx, 592, bw, 78, 0, C.ink); bx += bw + 5 + ((i * 5) % 3) * 3; }
+  }),
   // labelled interface components for the design-system build
   button: () => tex('button', 520, 160, (k) => { k.card(20, 20, 480, 110, 55, C.orange); k.t('Get started', 260, 76, 40, '#fff', 600, BODY, 'center'); }),
   field: () => tex('field', 620, 190, (k) => { k.card(20, 20, 580, 150, 30); k.m('EMAIL', 54, 62, 20); k.t('sam@northwind.io', 54, 116, 36, C.ink); k.rr(560, 78, 4, 70, 2, C.blue); }),

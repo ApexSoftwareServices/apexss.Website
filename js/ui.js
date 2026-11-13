@@ -106,7 +106,7 @@ function setChapter(i) {
   if (idx < 0) return;
   railDots.forEach((d, j) => d.classList.toggle('on', j === idx));
   const label = $('#hudChapter');
-  if (label) label.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(hudSections.length).padStart(2, '0')} — ${sec.dataset.chapter}`;
+  if (label) label.textContent = `${String(idx + 1).padStart(2, '0')} / ${String(hudSections.length).padStart(2, '0')} · ${sec.dataset.chapter}`;
 }
 
 // ---------------------------------------------------------------------- nav
@@ -363,7 +363,7 @@ function initTerminal() {
       line('<a href="services.html">Open all services →</a>');
     },
     software() {
-      line('SaaS · custom software · mobile &amp; tablet apps · desktop apps · cloud &amp; APIs · UI/UX · modernization · consulting');
+      line('SaaS · custom software · mobile &amp; tablet apps · desktop apps · cloud &amp; APIs · UI/UX · modernization · consulting · contractors &amp; consultants for hire');
       line('<a href="software.html">Open Software &amp; Cloud →</a>');
     },
     ai() {
@@ -376,7 +376,7 @@ function initTerminal() {
       line('<a href="studio.html">Open Apex Studio →</a>');
     },
     about() {
-      line('Apex Software Services — Chicago, Illinois.');
+      line('Apex Software Services, Chicago, Illinois.');
       line('More than 20 years building applications, products and consulting. We deliver reliably and fast.');
     },
     careers() { line('No open positions right now. <a href="careers.html">See the careers page →</a>'); },
@@ -385,7 +385,7 @@ function initTerminal() {
       line('<a href="contact.html">Open the project form →</a>');
     },
     surge() { if (experience) { experience.pulse(); line('<span class="ta">◉ surge dispatched</span>'); } else line('3D scene is offline on this device.'); },
-    whoami() { line('guest — and possibly our next favourite client.'); },
+    whoami() { line('guest, and possibly our next favourite client.'); },
     sudo() { line('<span class="te">permission denied:</span> nice try.'); },
     clear() { out.innerHTML = ''; },
     goto(arg) {
@@ -401,7 +401,7 @@ function initTerminal() {
     echo(cmd);
     const [name, ...args] = cmd.toLowerCase().split(/\s+/);
     const fn = Object.hasOwn(commands, name) ? commands[name] : null;
-    if (fn) fn(args[0]); else line(`<span class="te">command not found:</span> ${name.replace(/[^\w-]/g, '')} <span class="td">— type</span> help`);
+    if (fn) fn(args[0]); else line(`<span class="te">command not found:</span> ${name.replace(/[^\w-]/g, '')} <span class="td">· type</span> help`);
     out.scrollTop = out.scrollHeight;
   }
   form.addEventListener('submit', (e) => {
@@ -416,7 +416,7 @@ function initTerminal() {
   });
   term.addEventListener('click', (e) => { if (!e.target.closest('a,button') && !String(getSelection())) input.focus({ preventScroll: true }); });
   $$('[data-cmd]', term).forEach((b) => b.addEventListener('click', () => run(b.dataset.cmd)));
-  line('<span class="td">Apex shell — type a command or tap a shortcut below.</span>');
+  line('<span class="td">Apex shell. Type a command or tap a shortcut below.</span>');
   run('help');
 }
 
@@ -494,7 +494,7 @@ function initGame() {
     if (round < 4) { round++; return load(); }
     finished = true;
     el.choices.innerHTML = '';
-    el.msg.textContent = `You solved ${score} of 5 on the first try. A clear goal, instant feedback and a concept that sticks: that is an educational game. We build them for classrooms, onboarding and training.`;
+    el.msg.textContent = `You solved ${score} of 5 on the first try. That was a small educational game. We build them for classrooms, onboarding and training.`;
     el.next.innerHTML = `Play again ${ARROW}`;
   });
   for (const [sw, which] of [[el.a, 'a'], [el.b, 'b']]) {
@@ -513,8 +513,8 @@ function initContact() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form), get = (k) => String(data.get(k) || '').trim();
-    const subject = `New project inquiry — ${get('company') || get('name')}`;
-    const body = [`Name: ${get('name')}`, `Email: ${get('email')}`, `Company: ${get('company') || '—'}`, `Interested in: ${get('topic') || '—'}`, '', get('message')].join('\n');
+    const subject = `New project inquiry: ${get('company') || get('name')}`;
+    const body = [`Name: ${get('name')}`, `Email: ${get('email')}`, `Company: ${get('company') || 'n/a'}`, `Interested in: ${get('topic') || 'n/a'}`, '', get('message')].join('\n');
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     if (note) note.textContent = `Your email app should open with the message ready to send. If it doesn't, write to ${EMAIL}.`;
     experience?.pulse();
@@ -548,31 +548,37 @@ function initCareers() {
     note.textContent = ''; form.reset(); $('#applyRole').value = job.title;
     dialog.showModal();
   });
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form), get = (k) => String(data.get(k) || '').trim();
-    const file = data.get('resume');
-    if (file && file.size > 10 * 1024 * 1024) { note.textContent = 'That file is larger than 10 MB. Please upload a smaller résumé.'; return; }
-    const submit = $('button[type="submit"]', form);
+  const submit = $('button[type="submit"]', form);
+  form.addEventListener('submit', (e) => {
+    const val = (id) => $(id).value.trim();
+    const file = $('#aResume').files[0];
+    if (file && file.size > 10 * 1024 * 1024) { e.preventDefault(); note.textContent = 'That file is larger than 10 MB. Please upload a smaller résumé.'; return; }
     if (APPLY_ENDPOINT) {
-      submit.disabled = true; note.textContent = 'Sending your application…';
-      try {
-        const res = await fetch(APPLY_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-        if (!res.ok) throw new Error(String(res.status));
-        form.reset();
-        note.textContent = 'Thank you. Your application has been received, and a person will read it.';
-      } catch (err) {
-        note.textContent = `Something went wrong sending the form. Please email your application to ${EMAIL}.`;
-      } finally { submit.disabled = false; }
+      // An ordinary form post, which is what carries the attached file. The relay emails the answers
+      // and the résumé, then sends the applicant back to this page.
+      form.action = APPLY_ENDPOINT;
+      $('#applySubject').value = `Application for ${val('#applyRole')} from ${val('#aName')}`;
+      $('#applyReply').value = val('#aEmail');
+      $('#applyNext').value = `${location.origin}${location.pathname}?applied=1`;
+      note.textContent = 'Sending your application…';
+      setTimeout(() => { submit.disabled = true; }, 0);   // after the browser has collected the form
       return;
     }
-    // no endpoint configured: hand the text over to the applicant's email app
-    const body = [`Role: ${get('role')}`, `Name: ${get('name')}`, `Email: ${get('email')}`, `LinkedIn: ${get('linkedin')}`, '',
-      'A project I am proud of:', get('project_1'), '', 'A hard problem I solved:', get('project_2'), '', 'Other relevant work:', get('project_3') || '—', '',
+    // no address configured: hand the text over to the applicant's email app
+    e.preventDefault();
+    const body = [`Role: ${val('#applyRole')}`, `Name: ${val('#aName')}`, `Email: ${val('#aEmail')}`, `LinkedIn: ${val('#aLinkedin')}`, '',
+      'A project I am proud of:', val('#aP1'), '', 'A hard problem I solved:', val('#aP2'), '', 'Other relevant work:', val('#aP3') || 'n/a', '',
       '(Please attach your résumé to this email before sending.)'].join('\n');
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Application — ' + get('role'))}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Application for ' + val('#applyRole'))}&body=${encodeURIComponent(body)}`;
     note.textContent = 'Your email app should open with your answers filled in. Attach your résumé there, then send.';
   });
+  // coming back with the Back button restores the page as it was left: make the form usable again
+  window.addEventListener('pageshow', (e) => { if (e.persisted) { submit.disabled = false; note.textContent = ''; } });
+  // returning from a sent application
+  if (new URLSearchParams(location.search).has('applied')) {
+    $('#applyDone').hidden = false;
+    history.replaceState(null, '', location.pathname + location.hash);
+  }
 }
 
 boot();

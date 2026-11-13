@@ -41,8 +41,21 @@ colour with `data-tone` (`blue`, `green`, `orange`).
 ## Careers
 
 Edit `js/careers.js`. Set a job's `status` to `open` to list it with an Apply button, or `filled` to show it as closed.
-The application form includes a resume upload, so `APPLY_ENDPOINT` must point at a form endpoint that accepts
-multipart POSTs. While it is empty, the form falls back to opening the applicant's email app.
+
+Applications are emailed to the address in `APPLY_TO`, with the resume attached. A static page cannot send an
+email with an attachment by itself, so the form posts to [FormSubmit](https://formsubmit.co), which forwards the
+answers and the uploaded file to that address:
+
+- The first application ever submitted makes FormSubmit send a one-time activation link to the address. Click it
+  once. Until then, applications are not delivered.
+- After activation FormSubmit sends a random-looking alias that can replace the address in `APPLY_TO`, which keeps
+  the address out of the page source.
+- Applicants pass FormSubmit's "I am not a robot" check (Google reCAPTCHA), then land back on the Careers page with a
+  confirmation. The check is on by default. Do not add a `_captcha` field to the form: setting it to `false` is how the
+  check gets switched off.
+- Uploads are limited to 10 MB.
+
+If `APPLY_TO` is empty, the form falls back to opening the applicant's own email app.
 
 ## Logo
 

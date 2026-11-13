@@ -243,6 +243,24 @@ function blueprints(M) {
       part(mesh(G.torus(0.52, 0.03), M.alu), [-1.45, 0.72, -0.95], [-1.3, 1.2, -0.7], [Math.PI / 2, 0, 0]),
       part(box(1.9, 0.03, 0.2, M.alu, 0.01), [0.6, 0.7, 1.15], [1.2, 0.9, 1.2], [0, 0.35, 0]),
     ],
+    // contractors and consultants: the client's product in the middle, our people's machines plugging into it,
+    // and their staff badges arriving on either side
+    hire: () => {
+      const seats = [[-1.95, 0.85, 0.44, ART.flat('desk', ART.deskShell(), ART.deskCanvas(), ART.deskPanels())], [0, 1.4, 0, ART.flow()],
+        [1.95, 0.85, -0.44, ART.flat('site', ART.siteShell(), ART.siteCards(), ART.siteHero(), ART.siteNav())]];
+      const badge = (label, color, strap) => {
+        const w = 0.92, h = 1.29, loop = at(mesh(G.torus(0.25, 0.016), strap), 0, h / 2 + 0.47, 0);
+        loop.scale.set(1, 1.75, 1);
+        return group(box(w, h, 0.035, M.white, 0.07), at(face(w, h, M.layer(ART.badge(label, color)), 0.07), 0, 0, 0.02), at(box(0.2, 0.12, 0.05, M.alu, 0.02), 0, h / 2 + 0.03, 0), loop);
+      };
+      return [
+        ...monitor(3.3, 2.06, ART.dashShell(), [ART.dashChart(), ART.dashKpis()], { y: 2.3, z: -0.8 }),
+        ...seats.map(([x, z], i) => part(group(tube([[x * 0.94, 0.03, z - 0.5], [x * 0.5, 0.03, z * 0.1 - 0.45], [x * 0.12, 0.03, -0.72]], 0.022, M.accent)), [0, 0, 0], [(i - 1) * 0.6, -0.6, 0.5])),
+        ...seats.map(([x, z, ry, shell], i) => part(laptop(shell, 0.36, 1.92), [x, 0.02, z], [x * 0.3, 0.55 + (i % 2) * 0.35, 1.6], [0, ry, 0])),
+        part(badge('Contractor', '#1296d6', M.blue), [-2.5, 2.2, 0.15], [-0.1, 1.3, -1.3], [0, 0.4, 0]),
+        part(badge('Consultant', '#7fb21a', M.green), [2.5, 2.2, 0.15], [0.1, 1.3, -1.3], [0, -0.4, 0]),
+      ];
+    },
 
     // ======================================================== ai & hardware
     // a 4U GPU server, opened up: board, coolers and memory, four accelerators, fan wall, power, lid
@@ -390,7 +408,7 @@ function blueprints(M) {
 }
 
 // how far each build is turned on the stage; cases show a corner, screens face the camera more squarely
-const YAW = { workstation: -1.32, server: -1.02, modern: -0.95, consult: -0.85, film: -1.0, agents: -0.9, cloud: -0.9, game: -0.86, team: -0.86, website: -0.86 };
+const YAW = { workstation: -1.32, server: -1.02, modern: -0.95, consult: -0.85, hire: -0.86, film: -1.0, agents: -0.9, cloud: -0.9, game: -0.86, team: -0.86, website: -0.86 };
 
 const PAD_FRAG = /* glsl */ `
   uniform vec3 uColor; uniform float uLight, uTime, uK;
