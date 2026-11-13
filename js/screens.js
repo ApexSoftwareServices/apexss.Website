@@ -269,8 +269,6 @@ export function drawBackplate() {
   const face = make(1280, 512), glow = make(1280, 512);
   let c = face.c;
   brushed(c, 1280, 512, '#2b3038', '#1d2128', '#343a44');
-  c.strokeStyle = 'rgba(255,255,255,0.07)'; c.lineWidth = 3;
-  for (let i = 0; i < 9; i++) { c.beginPath(); c.moveTo(760 + i * 60, 0); c.lineTo(1040 + i * 60, 512); c.stroke(); }
   c.fillStyle = 'rgba(0,0,0,0.35)';
   for (let i = 0; i < 14; i++) for (let j = 0; j < 3; j++) { rr(c, 70 + i * 44, 372 + j * 34, 30, 16, 8); c.fill(); }
   const k = 2.6;

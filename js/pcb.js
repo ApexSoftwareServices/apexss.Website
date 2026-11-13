@@ -1,7 +1,8 @@
 // The Apex A1 mainboard: where everything sits, how it is routed, and the artwork printed on it.
 // layoutBoard() decides the parts and traces; paintBoard() draws the copper, solder mask, gold and
-// silkscreen onto canvases that world.js uses as the board's colour and relief textures.
+// silkscreen onto canvases that world.js uses as the board's colour, normal and surface textures.
 import { drawLogo, LOGO } from './screens.js';
+import { normalFromHeight } from './finish.js';
 
 export const BOARD = { x0: -10, x1: 12, z0: -10.5, z1: 8.5 };
 export const BOARD_W = BOARD.x1 - BOARD.x0, BOARD_D = BOARD.z1 - BOARD.z0;
@@ -103,7 +104,11 @@ export function layoutBoard() {
   keep(-0.8, 5.55, 0.8, 7.05);
   for (const h of P.headers) keep(h.x - h.n * 0.09 - 0.25, 7.4, h.x + h.n * 0.09 + 0.25, 8.3);
   keep(8.3, -9.4, 11.8, -8.0);
-  keep(-2.3, 4.4, 2.3, 5.5);                     // silkscreen logo
+  keep(-2.3, 4.4, 2.3, 5.7);                     // silkscreen logo
+  // printed labels: keep parts off them
+  keep(-4.05, 2.55, -3.3, 2.95); keep(5.7, 3.1, 7.3, 3.5); keep(-0.45, 7.0, 0.45, 7.4); keep(3.5, -5.8, 4.3, -5.45); keep(10.4, 3.5, 10.7, 4.7);
+  keep(8.5, -7.95, 11.4, -7.55); keep(3.2, 3.3, 5.3, 4.2); keep(-4.15, -8.8, -2.9, -8.4); keep(1.3, -9.95, 2.9, -9.55); keep(-6.6, -2.4, -5.4, -2.0);
+  for (const h of P.headers) keep(h.x - 0.5, 7.05, h.x + 0.5, 7.4);
   for (const [x, z] of P.holes) keep(x - 0.6, z - 0.6, x + 0.6, z + 0.6);
 
   // ---- live buses: these also become animated ribbons carrying current
@@ -189,23 +194,38 @@ export function layoutBoard() {
   place('soic', 1.9, 6.7, 1.1, 0.6, 0, { name: 'U' + ref.U++ });
   for (let i = 0; i < 6; i++) place('ecap', -9.35 + (i % 3) * 0.6, 5.0 + Math.floor(i / 3) * 0.62, 0.42, 0.42, 0, { gold: true });
 
-  for (let gz = BOARD.z0 + 0.7; gz < BOARD.z1 - 0.5; gz += 0.44) for (let gx = BOARD.x0 + 0.7; gx < BOARD.x1 - 0.5; gx += 0.44) {
-    const x = Math.round((gx + (rand() - 0.5) * 0.3) * 8) / 8, z = Math.round((gz + (rand() - 0.5) * 0.3) * 8) / 8;
+  // Candidate spots on a jittered grid, visited in random order. A handful of chips claim space first,
+  // then the medium parts, then rows of passives fill in around them, the way a real board is populated.
+  const spots = [];
+  for (let gz = BOARD.z0 + 0.7; gz < BOARD.z1 - 0.5; gz += 0.32) for (let gx = BOARD.x0 + 0.7; gx < BOARD.x1 - 0.5; gx += 0.32)
+    spots.push([Math.round((gx + (rand() - 0.5) * 0.24) * 8) / 8, Math.round((gz + (rand() - 0.5) * 0.24) * 8) / 8]);
+  for (let k = spots.length - 1; k > 0; k--) { const m = Math.floor(rand() * (k + 1)); [spots[k], spots[m]] = [spots[m], spots[k]]; }
+  let chips = 0, cans = 0, coils = 0, xtals = 0, passives = 0;
+  for (const [x, z] of spots) {
+    if (chips >= 13) break;
     const r = rand(), ry = rand() < 0.5 ? 1 : 0;
-    if (r < 0.07) {
-      const len = 0.7 + Math.floor(rand() * 4) * 0.2;
-      place('soic', x, z, len, 0.52 + rand() * 0.12, ry, { name: 'U' + ref.U++ });
-    } else if (r < 0.095) {
-      const s = 0.8 + Math.floor(rand() * 3) * 0.25;
-      place(rand() < 0.5 ? 'qfp' : 'qfn', x, z, s, s, 0, { name: 'U' + ref.U++ });
-    } else if (r < 0.36) {
-      const n = 2 + Math.floor(rand() * 5), kind = rand() < 0.55 ? 'r' : 'c';
-      for (let k = 0; k < n; k++) { const [px, pz] = local(x, z, ry, 0, (k - (n - 1) / 2) * 0.17); place(kind, px, pz, 0.24, 0.12, ry); }
-    } else if (r < 0.44) place('ecap', x, z, 0.4, 0.4, 0);
-    else if (r < 0.465) place('ind', x, z, 0.55, 0.55, 0, { name: 'L' + ref.L++ });
-    else if (r < 0.48) place('xtal', x, z, 0.62, 0.26, ry, { name: 'Y' + ref.Y++ });
-    else if (r < 0.53) place('led', x, z, 0.14, 0.1, ry);
-    else if (r < 0.66 && isFree(x - 0.2, z - 0.2, x + 0.2, z + 0.2)) { pad(x, z, 0.11, 0.11); if (rand() < 0.6) { via(x + 0.2, z, 0.04); stub(x, z, rand() < 0.5 ? -1 : 1, 0); } }
+    if (r < 0.55) { if (place('soic', x, z, 0.7 + Math.floor(rand() * 4) * 0.2, 0.52 + rand() * 0.12, ry, { name: 'U' + ref.U })) { ref.U++; chips++; } }
+    else if (r < 0.8) { const q = 0.8 + Math.floor(rand() * 3) * 0.25; if (place(rand() < 0.5 ? 'qfp' : 'qfn', x, z, q, q, 0, { name: 'U' + ref.U })) { ref.U++; chips++; } }
+  }
+  for (const [x, z] of spots) {
+    const r = rand(), ry = rand() < 0.5 ? 1 : 0;
+    if (r < 0.03 && cans < 12) { if (place('ecap', x, z, 0.4, 0.4, 0)) cans++; }
+    else if (r < 0.04 && coils < 5) { if (place('ind', x, z, 0.55, 0.55, 0, { name: 'L' + ref.L })) { ref.L++; coils++; } }
+    else if (r < 0.05 && xtals < 4) { if (place('xtal', x, z, 0.62, 0.26, ry, { name: 'Y' + ref.Y })) { ref.Y++; xtals++; } }
+  }
+  // a row of resistors or capacitors, side by side
+  const row = (kind, x, z, n, ry) => {
+    const span = (n - 1) * 0.17, hx = ry ? span / 2 + 0.07 : 0.13, hz = ry ? 0.13 : span / 2 + 0.07;
+    if (!isFree(x - hx - 0.05, z - hz - 0.05, x + hx + 0.05, z + hz + 0.05)) return 0;
+    mark(x - hx - 0.02, z - hz - 0.02, x + hx + 0.02, z + hz + 0.02);
+    for (let k = 0; k < n; k++) { const [px, pz] = local(x, z, ry, 0, (k - (n - 1) / 2) * 0.17); L.smd.push({ kind, x: px, z: pz, w: 0.24, d: 0.12, ry }); }
+    return n;
+  };
+  for (const [x, z] of spots) {
+    const r = rand(), ry = rand() < 0.5 ? 1 : 0;
+    if (r < 0.62 && passives < 520) passives += row(rand() < 0.5 ? 'r' : 'c', x, z, 1 + Math.floor(rand() * 5), ry);
+    else if (r < 0.68) place('led', x, z, 0.14, 0.1, ry);
+    else if (r < 0.8 && isFree(x - 0.2, z - 0.2, x + 0.2, z + 0.2)) { pad(x, z, 0.11, 0.11); if (rand() < 0.6) { via(x + 0.2, z, 0.04); stub(x, z, rand() < 0.5 ? -1 : 1, 0); } }
   }
 
   // footprints, designators and escape routing for everything placed
@@ -279,35 +299,53 @@ export function layoutBoard() {
 }
 
 // ----------------------------------------------------------------- paint
-const C = {
-  gap: '#07241a', pour: '#0f4735', trace: '#2c9773', pwr: '#278b69', via: '#3fae88', hole: '#051811',
-  gold: '#dcb85e', goldDeep: '#b8923e', silk: '#e8f0ea',
+// The board is painted three times from the same layout: colour, height (for the normal map) and
+// surface (roughness in green, metalness in blue), so gold glints, mask is satin and print is matte.
+// Solder mask is matte black, as on current high-end boards; copper shows through as a satin slate.
+const INK = {
+  gap: '#07090c', pour: '#12161b', trace: '#252d37', pwr: '#20272f', via: '#8f7b48', hole: '#020304',
+  gold: '#f0cd7c', goldDeep: '#d6ae56', silk: '#eef1f4',
 };
+const HEIGHT = { gap: '#3a3a3a', pour: '#6c6c6c', trace: '#8e8e8e', pwr: '#8e8e8e', via: '#929292', hole: '#000000', gold: '#b6b6b6', goldDeep: '#b6b6b6', silk: '#a2a2a2' };
+const rm = (rough, metal) => `rgb(0,${Math.round(rough * 255)},${Math.round(metal * 255)})`;
+const SURFACE = { gap: rm(0.62, 0), pour: rm(0.46, 0), trace: rm(0.3, 0), pwr: rm(0.33, 0), via: rm(0.36, 1), hole: rm(0.9, 0), gold: rm(0.3, 1), goldDeep: rm(0.3, 1), silk: rm(0.84, 0) };
 
 export function paintBoard(L, width = 4096) {
   const S = width / BOARD_W, height = Math.round(BOARD_D * S);
   const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
-  const color = mk(width, height), relief = mk(Math.round(width / 2), Math.round(height / 2));
+  const half = () => mk(Math.round(width / 2), Math.round(height / 2));
+  const color = mk(width, height), relief = half(), surface = half();
   const X = (x) => (x - BOARD.x0) * S, Z = (z) => (z - BOARD.z0) * S;
 
-  const paint = (canvas, col, isRelief) => {
-    const c = canvas.getContext('2d'), k = canvas.width / width;
+  const paint = (canvas, col, kind) => {
+    const c = canvas.getContext('2d', kind === 'relief' ? { willReadFrequently: true } : undefined), k = canvas.width / width;
     c.setTransform(k, 0, 0, k, 0, 0);
     c.lineJoin = 'round'; c.lineCap = 'round';
     c.fillStyle = col.pour; c.fillRect(0, 0, width, height);
 
-    if (!isRelief) {
+    if (kind === 'color') {
       // uneven solder mask + the faint weave of the glass fibre beneath it
       const rnd = mulberry32(7);
       for (let i = 0; i < 260; i++) {
         const x = rnd() * width, y = rnd() * height, r = 120 + rnd() * 520;
         const g = c.createRadialGradient(x, y, 0, x, y, r);
-        g.addColorStop(0, rnd() < 0.5 ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.06)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        g.addColorStop(0, rnd() < 0.5 ? 'rgba(255,255,255,0.022)' : 'rgba(0,0,0,0.1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
         c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
       }
       const tile = mk(6, 6), tc = tile.getContext('2d');
-      tc.fillStyle = 'rgba(255,255,255,0.045)'; tc.fillRect(0, 0, 6, 1); tc.fillRect(0, 0, 1, 6);
+      tc.fillStyle = 'rgba(255,255,255,0.02)'; tc.fillRect(0, 0, 6, 1); tc.fillRect(0, 0, 1, 6);
       c.fillStyle = c.createPattern(tile, 'repeat'); c.fillRect(0, 0, width, height);
+    } else if (kind === 'surface') {
+      // the mask is never evenly glossy: add broad, soft patches of extra roughness
+      const rnd = mulberry32(31);
+      c.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < 150; i++) {
+        const x = rnd() * width, y = rnd() * height, r = 160 + rnd() * 700;
+        const g = c.createRadialGradient(x, y, 0, x, y, r);
+        g.addColorStop(0, `rgba(0,${Math.round(18 + rnd() * 34)},0,1)`); g.addColorStop(1, 'rgba(0,0,0,1)');
+        c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2);
+      }
+      c.globalCompositeOperation = 'source-over';
     }
 
     const stroke = (pts, w, style) => {
@@ -327,7 +365,7 @@ export function paintBoard(L, width = 4096) {
     for (const p of L.pads) {
       const x = X(p[0] - p[2] / 2), y = Z(p[1] - p[3] / 2), w = p[2] * S, h = p[3] * S;
       c.fillStyle = col.gap; c.fillRect(x - 2.5, y - 2.5, w + 5, h + 5);
-      if (isRelief) c.fillStyle = col.gold;
+      if (kind !== 'color') c.fillStyle = col.gold;
       else { const g = c.createLinearGradient(x, y, x + w, y + h); g.addColorStop(0, col.gold); g.addColorStop(1, col.goldDeep); c.fillStyle = g; }
       c.fillRect(x, y, w, h);
     }
@@ -373,7 +411,34 @@ export function paintBoard(L, width = 4096) {
     c.strokeStyle = col.gap; c.lineWidth = 0.1 * S; c.strokeRect(0, 0, width, height);
   };
 
-  paint(color, C, false);
-  paint(relief, { gap: '#3c3c3c', pour: '#6e6e6e', trace: '#a8a8a8', pwr: '#a8a8a8', via: '#b0b0b0', hole: '#000000', gold: '#d8d8d8', goldDeep: '#d8d8d8', silk: '#c0c0c0' }, true);
-  return { color, relief };
+  paint(color, INK, 'color');
+  paint(relief, HEIGHT, 'relief');
+  paint(surface, SURFACE, 'surface');
+  return { color, normal: normalFromHeight(relief, 2.2), surface };
+}
+
+// Soft contact shadows under the parts, darkening the board's colour where they sit.
+// Each entry: [x, z, width, depth, blur, strength, round]; blur 0 draws a plain tint (for the tiniest parts).
+// The shadows are soft, so they are drawn on a small canvas and multiplied over the full-size artwork.
+export function shadeBoard(canvas, list) {
+  const w = 1024, h = Math.round((w * BOARD_D) / BOARD_W), S = w / BOARD_W, OFF = w * 2;
+  const ao = document.createElement('canvas'); ao.width = w; ao.height = h;
+  const c = ao.getContext('2d');
+  c.fillStyle = '#fff'; c.fillRect(0, 0, w, h);
+  for (const [x, z, pw, pd, blur, alpha, round] of list) {
+    const px = (x - pw / 2 - BOARD.x0) * S, pz = (z - pd / 2 - BOARD.z0) * S;
+    if (!blur) { c.fillStyle = `rgba(0,0,0,${alpha})`; c.fillRect(px, pz, pw * S, pd * S); continue; }
+    // draw the shape off-canvas and keep only its blurred shadow
+    c.fillStyle = '#000'; c.shadowColor = `rgba(0,0,0,${alpha})`; c.shadowBlur = blur * S; c.shadowOffsetX = OFF;
+    c.beginPath();
+    if (round) c.ellipse(px + (pw * S) / 2 - OFF, pz + (pd * S) / 2, (pw * S) / 2, (pd * S) / 2, 0, 0, 7); else c.rect(px - OFF, pz, pw * S, pd * S);
+    c.fill();
+    c.shadowColor = 'transparent'; c.shadowBlur = 0; c.shadowOffsetX = 0;
+  }
+  const m = canvas.getContext('2d');
+  m.save();
+  m.setTransform(1, 0, 0, 1, 0, 0);
+  m.globalCompositeOperation = 'multiply'; m.imageSmoothingEnabled = true; m.imageSmoothingQuality = 'high';
+  m.drawImage(ao, 0, 0, canvas.width, canvas.height);
+  m.restore();
 }

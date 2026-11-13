@@ -4,6 +4,8 @@
 import * as THREE from 'three';
 import { FLOOR_Y, GLOW_BLEND } from './world.js';
 import { ART } from './art.js';
+import { FINISH } from './finish.js';
+import { lathe, spunDisc } from './geo.js';
 
 export const FORGE = new THREE.Vector3(31, FLOOR_Y, 2);
 const TAU = Math.PI * 2;
@@ -41,7 +43,7 @@ function materials(accentMat) {
     softbox: new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false }),
     accent: accentMat,
     // lit screens and the transparent interface layers that stack on them
-    screen: (t) => { const m = std({ color: 0x000000, emissive: 0xffffff, emissiveMap: t, emissiveIntensity: 0.96, roughness: 0.18, metalness: 0 }); screens.push(m); return m; },
+    screen: (t) => { const m = std({ color: 0x000000, emissive: 0xffffff, emissiveMap: t, emissiveIntensity: 0.96, roughness: 0.18, metalness: 0, toneMapped: false }); screens.push(m); return m; },
     layer: (t) => { const m = new THREE.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false, toneMapped: false }); layers.push(m); return m; },
     printed: (t, o = {}) => std({ map: t, roughness: 0.5, metalness: 0.2, ...o }),
   };
@@ -410,44 +412,54 @@ function blueprints(M) {
 // how far each build is turned on the stage; cases show a corner, screens face the camera more squarely
 const YAW = { workstation: -1.32, server: -1.02, modern: -0.95, consult: -0.85, hire: -0.86, film: -1.0, agents: -0.9, cloud: -0.9, game: -0.86, team: -0.86, website: -0.86 };
 
-const PAD_FRAG = /* glsl */ `
-  uniform vec3 uColor; uniform float uLight, uTime, uK;
-  varying vec2 vP;
-  void main() {
-    float r = length(vP);
-    float rings = smoothstep(0.02, 0.0, abs(fract(r * 1.4 - uTime * 0.06) - 0.5) - 0.475) * smoothstep(3.3, 1.2, r);
-    float ang = atan(vP.y, vP.x);
-    float ticks = step(0.86, fract(ang * 11.459)) * smoothstep(0.07, 0.0, abs(r - 3.2));
-    float sweep = pow(max(0.0, cos(ang - uTime * 0.6)), 30.0) * smoothstep(3.3, 0.6, r);
-    float a = (rings * 0.2 + ticks * 0.65 + sweep * 0.2) * uK * step(r, 3.36);
-    gl_FragColor = vec4(uColor * a * mix(1.0, 1.25, uLight), 0.0);
-    #include <colorspace_fragment>
-  }
-`;
-
 export function createForge({ accentMat }) {
   const M = materials(accentMat);
   const plans = blueprints(M);
   const group = new THREE.Group();
   group.position.copy(FORGE);
 
-  // ---- the stage: a machined turntable with a light ring
-  const padBase = new THREE.Mesh(new THREE.CylinderGeometry(3.6, 3.86, 0.24, 96), M.aluDark);
-  padBase.position.y = 0.12; padBase.receiveShadow = true;
-  const topMat = new THREE.MeshStandardMaterial({ color: 0x2b3038, metalness: 0.5, roughness: 1.0, roughnessMap: ART.brushed() });
-  const padTop = new THREE.Mesh(new THREE.CylinderGeometry(3.46, 3.46, 0.03, 96), topMat);
-  padTop.position.y = 0.245; padTop.receiveShadow = true;
-  const rim = new THREE.Mesh(new THREE.TorusGeometry(3.52, 0.028, 8, 128), accentMat);
-  rim.rotation.x = Math.PI / 2; rim.position.y = 0.25;
+  // ---- the stage: a lathe-turned aluminium platter floating over a dark plinth, with a ring of light between them
+  const flat = (m) => { m.receiveShadow = true; m.castShadow = true; return m; };
+  const plinthMat = new THREE.MeshStandardMaterial({ color: 0x1c1e23, metalness: 0.9, roughness: 0.52, roughnessMap: FINISH.brushed(10, 1) });
+  const plinth = flat(new THREE.Mesh(lathe([[0, 0], [3.9, 0], [3.95, 0.04], [3.95, 0.09], [3.9, 0.125], [3.2, 0.125]], 128), plinthMat));
+  const rimMat = new THREE.MeshStandardMaterial({ color: 0xd4d8de, metalness: 1, roughness: 0.26 });
+  const rim = flat(new THREE.Mesh(lathe([[3.2, 0.172], [3.62, 0.172], [3.685, 0.192], [3.685, 0.238], [3.655, 0.2622], [3.6, 0.2622]], 128), rimMat));
+  // the top is brushed in circles, so highlights fan out from the centre the way they do on turned metal
+  const topMat = new THREE.MeshPhysicalMaterial({ color: 0x555a63, metalness: 1, roughness: 0.5, roughnessMap: FINISH.brushed(7, 0.8), anisotropy: 0.85 });
+  const padTop = new THREE.Mesh(spunDisc(0, 3.62, 1, 160, 10), topMat);
+  padTop.position.y = 0.2625; padTop.receiveShadow = true;
+  // bare metal barely shows a cast shadow, so a shadow-only layer grounds whatever stands on the platter
+  const groundMat = new THREE.ShadowMaterial({ opacity: 0.26, color: 0x05070c });
+  const ground = new THREE.Mesh(spunDisc(0, 3.6, 1, 64, 1), groundMat);
+  ground.position.y = 0.2632; ground.receiveShadow = true; ground.renderOrder = 1;
+  // engraved scale near the edge: a tick every five degrees between two fine rings
+  const tickCanvas = document.createElement('canvas'); tickCanvas.width = 64; tickCanvas.height = 64;
+  const tc = tickCanvas.getContext('2d');
+  tc.fillStyle = '#fff'; tc.fillRect(30, 14, 4, 36); tc.fillRect(0, 2, 64, 3); tc.fillRect(0, 59, 64, 3);
+  const tickTex = new THREE.CanvasTexture(tickCanvas); tickTex.wrapS = THREE.RepeatWrapping; tickTex.anisotropy = 8;
+  const scaleMat = new THREE.MeshBasicMaterial({ alphaMap: tickTex, transparent: true, depthWrite: false, opacity: 0.5, color: 0x14171c, toneMapped: false });
+  const scaleGeo = spunDisc(3.3, 3.5, 72, 160, 1);
+  for (let k = 0, uv = scaleGeo.attributes.uv; k < uv.count; k++) uv.setY(k, (uv.getY(k) - 3.3) / 0.2);
+  const scale = new THREE.Mesh(scaleGeo, scaleMat);
+  scale.position.y = 0.264; scale.renderOrder = 2;
+  // the light: a glowing band under the platter, and its spill across the plinth
+  const band = new THREE.Mesh(lathe([[3.32, 0.125], [3.32, 0.172]], 128), accentMat);
   const padU = { uColor: { value: new THREE.Color() }, uLight: { value: 0 }, uTime: { value: 0 }, uK: { value: 1 } };
   const flatGeo = (s) => { const g = new THREE.PlaneGeometry(s, s); g.rotateX(-Math.PI / 2); return g; };
   const vert = 'varying vec2 vP; void main(){ vP = position.xz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
-  const pad = new THREE.Mesh(flatGeo(7), new THREE.ShaderMaterial({ uniforms: padU, ...GLOW_BLEND, vertexShader: vert, fragmentShader: PAD_FRAG }));
-  pad.position.y = 0.262; pad.renderOrder = 2;
+  const spill = new THREE.Mesh(flatGeo(8), new THREE.ShaderMaterial({
+    uniforms: padU, ...GLOW_BLEND, vertexShader: vert,
+    fragmentShader: `uniform vec3 uColor; uniform float uK; varying vec2 vP;
+      void main(){ float r = length(vP); float a = exp(-max(r - 3.32, 0.0) * 5.5) * step(3.3, r) * step(r, 3.9) * 0.85 * uK;
+      gl_FragColor = vec4(uColor * a, 0.0);
+      #include <colorspace_fragment>
+      }`,
+  }));
+  spill.position.y = 0.1265; spill.renderOrder = 1;
   const glow = new THREE.Mesh(flatGeo(18), new THREE.ShaderMaterial({
     uniforms: padU, ...GLOW_BLEND, vertexShader: vert,
     fragmentShader: `uniform vec3 uColor; uniform float uLight, uK; varying vec2 vP;
-      void main(){ float r = length(vP); float a = exp(-max(r - 3.8, 0.0) * 1.5) * 0.34 * uK * step(3.8, r); float aL = a * 0.06;
+      void main(){ float r = length(vP); float a = exp(-max(r - 3.95, 0.0) * 1.5) * 0.34 * uK * step(3.95, r); float aL = a * 0.08;
       gl_FragColor = vec4(uColor * mix(a * 0.7, aL, uLight), aL * uLight);
       #include <colorspace_fragment>
       }`,
@@ -466,7 +478,7 @@ export function createForge({ accentMat }) {
   spot.target.position.set(0, 1.2, 0);
   const rimLight = new THREE.SpotLight(0xffffff, 0, 60, 0.5, 0.9, 0);
   rimLight.position.set(7, 7, -9); rimLight.target.position.set(0, 1.6, 0);
-  group.add(padBase, padTop, rim, pad, glow, table, spot, spot.target, rimLight, rimLight.target);
+  group.add(plinth, rim, padTop, ground, scale, band, spill, glow, table, spot, spot.target, rimLight, rimLight.target);
 
   // ---- builds
   const built = new Map();
@@ -507,7 +519,7 @@ export function createForge({ accentMat }) {
   const want = { name: null, progress: 1 };
   let current = null, dock = 0, frames = 0;
   const leaving = [];
-  const topLight = new THREE.Color(0x343a44), topDark = new THREE.Color(0x15181d);
+  const topLight = new THREE.Color(0x555a63), topDark = new THREE.Color(0x30343b), inkLight = new THREE.Color(0xe9edf3), inkDark = new THREE.Color(0xdfe5ee);
 
   return {
     group,
@@ -518,6 +530,7 @@ export function createForge({ accentMat }) {
       frames++;
       padU.uColor.value.copy(cA); padU.uLight.value = L; padU.uTime.value = time;
       topMat.color.copy(topDark).lerp(topLight, L);
+      scaleMat.color.copy(inkDark).lerp(inkLight, L); scaleMat.opacity = 0.3 + 0.25 * L; groundMat.opacity = 0.42 - 0.16 * L;
       // in dark mode, screens are dimmed a little so their white interfaces stay readable under bloom
       const lum = 0.7 + 0.26 * L;
       for (const m of M.screens) m.emissiveIntensity = lum;
@@ -550,7 +563,7 @@ export function createForge({ accentMat }) {
         if (b.vis <= 0) { b.vis = 0; table.remove(b.holder); leaving.splice(i, 1); } else pose(b);
       }
       table.rotation.y = (current && YAW[current.name] !== undefined ? YAW[current.name] : -0.92) + Math.sin(time * 0.3) * 0.12;
-      padU.uK.value = 0.6 + dock * 0.7;
+      padU.uK.value = 0.55 + dock * 0.45;
     },
   };
 }

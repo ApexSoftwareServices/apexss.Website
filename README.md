@@ -20,9 +20,12 @@ one assembles in 3D from an exploded view.
 - `js/ui.js`: preloader, navigation and mega menu, service explorer, demos, forms
 - `js/careers.js`: open and filled positions, and where applications are sent
 - `js/scene.js`: renderer, lighting, camera stations, scroll choreography
-- `js/world.js`: the mainboard world: processor, memory, graphics card, racks, laptop, tablet, phone, cables
-- `js/pcb.js`: the board layout and its printed artwork (traces, pads, silkscreen)
-- `js/forge.js`: the fabrication stage and one 3D build per service
+- `js/world.js`: the world around the mainboard: studio lighting, racks, laptop, tablet, phone, cables
+- `js/pcb.js`: the board layout and its printed artwork (traces, pads, silkscreen), painted as colour, relief and surface maps
+- `js/parts.js`: everything mounted on the board: processor and socket, heatsinks, memory, graphics card, connectors, small parts
+- `js/geo.js`: shared geometry helpers (soft-edged boxes, extruded profiles, lathed parts, fan blades)
+- `js/finish.js`: surface finishes (brushed metal, moulded plastic) and the height-to-normal conversion
+- `js/forge.js`: the turntable stage and one 3D build per service
 - `js/art.js`: the interface designs shown on the build screens
 - `js/screens.js`: the live laptop/tablet/phone screens and the Apex logo
 - `vendor/`: three.js r170 and its post-processing add-ons (MIT), vendored so the site has no CDN dependency

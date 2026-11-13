@@ -22,7 +22,7 @@ const STATIONS = {
   laptop: 'blue', tablet: 'orange', phone: 'green', studio: 'orange', forge: 'blue',
 };
 
-const DARK = { bg: 0x03050b, board: 0x6f7d78 };
+const DARK = { bg: 0x03050b, board: 0xb9c0c4 };
 const LIGHT = { bg: 0xf3f5fa, board: 0xffffff };
 
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -33,7 +33,8 @@ const hash = (seed, k) => { const v = Math.sin(seed * 91.7 + k * 12.9898) * 4375
 export function createExperience({ canvas, sections, reducedMotion = false, light = false, onChapter = () => {} }) {
   const small = Math.min(window.innerWidth, window.innerHeight) < 700;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
-  renderer.toneMapping = THREE.NoToneMapping;
+  // a neutral tone curve: colours stay true, bright highlights roll off instead of clipping
+  renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate = true;       // each light decides for itself (see shadow.autoUpdate)
@@ -283,11 +284,11 @@ export function createExperience({ canvas, sections, reducedMotion = false, ligh
     starMat.opacity = (1 - L) * 0.8 * iE;
     const env = L > 0.5 ? world.envLight : world.envDark;
     if (scene.environment !== env) { scene.environment = env; world.boardMat.envMap = env; }
-    scene.environmentIntensity = mixN(0.9, 0.8, L);
-    hemi.intensity = mixN(0.12, 1.0, L);
-    key.intensity = mixN(0.8, 1.9, L);
-    fill.intensity = mixN(0.1, 0.45, L);
-    world.boardMat.envMapIntensity = mixN(0.75, 0.3, L);
+    scene.environmentIntensity = mixN(1.0, 0.62, L);
+    hemi.intensity = mixN(0.1, 0.5, L);
+    key.intensity = mixN(1.1, 2.7, L);
+    fill.intensity = mixN(0.1, 0.35, L);
+    world.boardMat.envMapIntensity = mixN(1.0, 0.62, L);
     world.boardMat.color.copy(dBoard).lerp(lBoard, L);
     world.floorMat.opacity = mixN(0.55, 0.22, L);
 
@@ -353,6 +354,7 @@ export function createExperience({ canvas, sections, reducedMotion = false, ligh
     // -- glowing parts
     world.accentMat.color.copy(cHot);
     world.postMat.color.copy(cHot);
+    world.barMat.emissive.copy(cA); world.barMat.emissiveIntensity = mixN(1.9, 0.95, L);
     world.lidMat.emissiveIntensity = mixN(1.25, 0.0, L) * (0.8 + 0.2 * Math.sin(time * 1.7));
     world.gpuMat.emissiveIntensity = mixN(1.3, 0.0, L) * (0.85 + 0.15 * Math.sin(time * 1.3 + 1));
     for (const u of world.holo.uniforms) { u.uColor.value.copy(cA); u.uTime.value = time; u.uLight.value = L; }
